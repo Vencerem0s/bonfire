@@ -17,11 +17,12 @@ public class SaxeArea : MonoBehaviour
     {
         LookAtMouse();
     }
-
+    
     private void LookAtMouse()
     {
         var direction = Input.mousePosition - Camera.main.WorldToScreenPoint(saxeTrans.position); // Нахождение катетов для расчёта тангенса, а в последствии и градусов угла. 
         var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // Нахождение тангенса угла и перевод его в градусы.
         saxeTrans.rotation = Quaternion.AngleAxis(angle, Vector3.forward); // Вращение объекта на полученное значение градусов.
     }
+
 }
