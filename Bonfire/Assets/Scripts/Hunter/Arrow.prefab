@@ -120,13 +120,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3286fbcd2308fd743bf517f41904d0e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
-  lifetime: 0.5
-  distance: 0.5
-  damage: 20
-  whatIsSolid:
-    serializedVersion: 2
-    m_Bits: 8
+  shotPoint: {fileID: 0}
+  speed: 20
 --- !u!61 &7857115835741484279
 BoxCollider2D:
   m_ObjectHideFlags: 0

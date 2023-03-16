@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Bow : MonoBehaviour
@@ -7,14 +8,14 @@ public class Bow : MonoBehaviour
     public GameObject arrow;
     public float arrowSpeed;
     public Transform shotPoint;
-    private float timeBtwShots;
-    private float startTimeBtwShots = 0.25f;
+    //private float timeBtwShots;
+    //private float startTimeBtwShots = 2f;
     void Start()
     {
         
     }
 
-    void Update()
+    /*void Update()
     {
         if(timeBtwShots <= 0)
         {
@@ -26,9 +27,14 @@ public class Bow : MonoBehaviour
         }
         
         
+    }*/
+    public void Shoot()
+    {
+        Instantiate(arrow, shotPoint.position, transform.rotation);
     }
 
-    private void LookAtMouseKlick()
+
+    /*private void LookAtMouseKlick()
     {
         if (Input.GetMouseButton(0))
         {
@@ -40,5 +46,5 @@ public class Bow : MonoBehaviour
     {
         GameObject newArrow = Instantiate(arrow, shotPoint.position, transform.rotation);
         newArrow.GetComponent<Rigidbody2D>().velocity = transform.forward * arrowSpeed;
-    }
+    }*/
 }
