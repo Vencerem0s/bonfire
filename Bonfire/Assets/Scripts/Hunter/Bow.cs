@@ -5,10 +5,10 @@ using UnityEngine;
 public class Bow : MonoBehaviour
 {
     public GameObject arrow;
-    public float launchForce;
+    public float arrowSpeed;
     public Transform shotPoint;
     private float timeBtwShots;
-
+    private float startTimeBtwShots = 0.25f;
     void Start()
     {
         
@@ -16,7 +16,15 @@ public class Bow : MonoBehaviour
 
     void Update()
     {
-        LookAtMouseKlick();
+        if(timeBtwShots <= 0)
+        {
+            LookAtMouseKlick();
+            timeBtwShots = startTimeBtwShots;
+        }else
+        {
+            timeBtwShots -= Time.deltaTime;
+        }
+        
         
     }
 
@@ -30,9 +38,7 @@ public class Bow : MonoBehaviour
 
     void ShootArrow()
     {
-        //GameObject newArrow = Instantiate(arrow, shotPoint.position, shotPoint.rotation);
-
-        GameObject newArrow = Instantiate(arrow, shotPoint.position, transform.rotation);//shotPoint.rotation);
-        newArrow.GetComponent<Rigidbody2D>().velocity = transform.forward * launchForce;
+        GameObject newArrow = Instantiate(arrow, shotPoint.position, transform.rotation);
+        newArrow.GetComponent<Rigidbody2D>().velocity = transform.forward * arrowSpeed;
     }
 }
