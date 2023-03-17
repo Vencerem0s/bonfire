@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Bow : MonoBehaviour
@@ -10,10 +7,11 @@ public class Bow : MonoBehaviour
     public Transform shotPoint;
     //private float timeBtwShots;
     //private float startTimeBtwShots = 2f;
-    void Start()
+
+    /*void Start()
     {
         
-    }
+    }*/
 
     /*void Update()
     {

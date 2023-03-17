@@ -1,26 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Attacks : MonoBehaviour
 {
     private GameObject weapon;
     private Bow bow;
+    private Staff staff;
 
     private void Start()
     {
         if(GameObject.Find("Dwarf"))
         {
+            GameObject.Find("Dwarf").GetComponent<Movement>().speed = 4f;
             Debug.Log("функция для атаки гнома");
         }
         else if(GameObject.Find("Mage"))
         {
+            GameObject.Find("Mage").GetComponent<Movement>().speed = 4f;
+            weapon = GameObject.Find("Staff");
+            staff = weapon.GetComponent<Staff>();
             Debug.Log("функция для атаки мага");
         }
         else if(GameObject.Find("Hunter"))
         {
+            GameObject.Find("Hunter").GetComponent<Movement>().speed = 7f;
             weapon = GameObject.Find("Bow");
             bow = weapon.GetComponent<Bow>();
+            Debug.Log("функция для атаки охотника");
         }
         else
         {
@@ -30,6 +35,21 @@ public class Attacks : MonoBehaviour
 
     private void OnMouseDown()
     {
-        bow.Shoot();
+        if (weapon.name == "Bow")
+        {
+            bow.Shoot();
+        }
+        else if (weapon.name == "Staff")
+        {
+            staff.StaffSpell();
+        }
+    }
+
+    private void OnMouseUp()
+    {
+        if (weapon.name == "Staff")
+        {
+            staff.StaffSpellOff();
+        }
     }
 }

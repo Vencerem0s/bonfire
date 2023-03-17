@@ -2,29 +2,37 @@ using UnityEngine;
 
 public class Dwarf : MonoBehaviour
 {
-    public Transform player;
-    public Vector2 moveVector;
+    //public Transform player;
 
-    private Rigidbody2D rb;
+    //private Rigidbody2D rb;
 
-    [SerializeField] private float speed;
-
-    private Animator attack;
+    // private Animator attack;
 
     void Start()
     {
-        speed = 1f;
-        attack = player.GetComponent<Animator>();
-        rb = GetComponent<Rigidbody2D>();
-        attack.SetBool("Attack", false);
+        //attack = player.GetComponent<Animator>();
+        //rb = GetComponent<Rigidbody2D>();
+        //attack.SetBool("Attack", false);
     }
 
     private void Update()
     {
-        Walk();
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            print("Q key was pressed");
+        }
+        else if (Input.GetKeyDown(KeyCode.E))
+        {
+            print("E key was pressed");
+        }
+        else if (Input.GetKeyDown(KeyCode.F))
+        {
+            print("F key was pressed");
+        }
     }
 
-    private void OnMouseDrag()
+    //анимация работает, но дайдём до нее после
+    /*private void OnMouseDrag()
     {
         Debug.Log("atach");
         attack.SetBool("Attack", true);
@@ -34,12 +42,5 @@ public class Dwarf : MonoBehaviour
     {
         Debug.Log("noatach");
         attack.SetBool("Attack", false);
-    }
-
-    private void Walk()
-    {
-        moveVector.x = Input.GetAxis("Horizontal");
-        moveVector.y = Input.GetAxis("Vertical");
-        rb.velocity = new Vector2(moveVector.x * speed, moveVector.y * speed);
-    }
+    }*/
 }

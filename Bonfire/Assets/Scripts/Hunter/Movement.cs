@@ -1,19 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class HunterMovement : MonoBehaviour
+public class Movement : MonoBehaviour
 {
     private Rigidbody2D rb;
     public Vector2 moveVector;
-    public float speed = 2f;
+    public float speed;
     
 
     private Transform saxeTrans;
-    public GameObject hunter;
+    //public GameObject hunter;
 
     void Start()
     {
+        
         saxeTrans = gameObject.transform;
         rb = GetComponent<Rigidbody2D>();
     }
@@ -21,12 +20,11 @@ public class HunterMovement : MonoBehaviour
     
     void Update()
     {
-        HunterWalk();
+        Walk();
         LookAtMouse();
-        
     }
 
-    private void HunterWalk()
+    private void Walk()
     {
         moveVector.x = Input.GetAxis("Horizontal");
         moveVector.y = Input.GetAxis("Vertical");
