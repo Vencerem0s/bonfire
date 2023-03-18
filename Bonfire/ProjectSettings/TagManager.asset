@@ -8,6 +8,7 @@ TagManager:
   - attach
   - square
   - wall
+  - Enemy
   layers:
   - Default
   - TransparentFX
