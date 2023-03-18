@@ -906,6 +906,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35fe3de91dfcb5040a70c54c029e9ed6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1405257780
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1405257781}
+  m_Layer: 0
+  m_Name: ShotPointEnd
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1405257781
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1405257780}
+  m_LocalRotation: {x: -0.007867146, y: 0.012135869, z: -0.70883805, w: 0.705223}
+  m_LocalPosition: {x: 0.004, y: 10, z: 0.107}
+  m_LocalScale: {x: 1.7380201, y: 1.2500268, z: 1.0003533}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6592295166478308167}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0.35, y: 1.62, z: -90.288}
 --- !u!1 &1455173257
 GameObject:
   m_ObjectHideFlags: 0
@@ -967,7 +998,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
+  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1009,7 +1040,7 @@ BoxCollider2D:
   m_Offset: {x: -0.015576363, y: 0.1076107}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.28866667}
+    pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
@@ -1642,7 +1673,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6592295166478308162
 Transform:
   m_ObjectHideFlags: 0
@@ -1723,6 +1754,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6592295166478308162}
+  - {fileID: 1405257781}
   m_Father: {fileID: 2442029365721603248}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0.35, y: 1.62, z: -90}
@@ -1738,13 +1770,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 563430cbe65da684eaeee4c4ab88874f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laserPrefab: {fileID: 6592295166478308160}
-  maxLaserDistance: 5
-  laserDamage: 10
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  staffcast: 0
+  defDistanceRay: 4
+  laserFireStartPoint: {fileID: 6592295166478308162}
+  laserFireEndPoint: {fileID: 1405257781}
+  m_lineRenderer: {fileID: 6592295166478308172}
+  staffCast: 0
 --- !u!120 &6592295166478308172
 LineRenderer:
   m_ObjectHideFlags: 0

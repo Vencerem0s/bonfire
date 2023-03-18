@@ -4,7 +4,7 @@ public class Staff : MonoBehaviour
 {
     //private Collider2D coll;
 
-    public GameObject laserPrefab;
+    /*public GameObject laserPrefab;
 
     // Максимальная длина луча
     public float maxLaserDistance = 5f;
@@ -20,11 +20,59 @@ public class Staff : MonoBehaviour
     private Material laserMaterial;
 
     // Камера, используемая для определения позиции курсора
-    private Camera cam;
+    private Camera cam;*/
+
+    [SerializeField] private float defDistanceRay = 4f;
+    public Transform laserFireStartPoint;
+    public Transform laserFireEndPoint;
+    public LineRenderer m_lineRenderer;
+    private RaycastHit2D _hit;
+    Transform m_Transform;
 
     public bool staffCast;
 
-    private void Start()
+    private void Awake()
+    {
+        m_Transform = GetComponent<Transform>();
+    }
+
+    private void Update()
+    {
+        //m_Transform = GetComponent<Transform>();
+        _hit = Physics2D.Raycast(laserFireStartPoint.position, Camera.main.ScreenToWorldPoint(Input.mousePosition), defDistanceRay);
+        ShootLaser();
+    }
+
+    void ShootLaser()
+    {
+        //RaycastHit2D _hit = Physics2D.Raycast(laserFireStartPoint.position, Camera.main.ScreenToWorldPoint(Input.mousePosition), defDistanceRay);
+
+        /*if ()
+        {
+
+        }*/
+        if (Physics2D.Raycast(m_Transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition), defDistanceRay))//нужна разница между начальной точкой и тем что пересекает, на эту длину вызывать
+        {
+            //RaycastHit2D _hit = Physics2D.Raycast(laserFireStartPoint.position, Camera.main.ScreenToWorldPoint(Input.mousePosition), defDistanceRay);
+            //Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition);// - (Vector2)currentLaser.transform.position;
+            Draw2DRay(laserFireStartPoint.position, new Vector3(_hit.point.x, _hit.point.y, 0));
+            print("1");
+        }
+        else
+        {
+            Draw2DRay(laserFireStartPoint.position, laserFireEndPoint.position);
+            print("22");
+        }
+        //Draw2DRay(laserFireStartPoint.position, _hit);
+    }
+
+    void Draw2DRay(Vector2 startPos, Vector2 endPos)
+    {
+        m_lineRenderer.SetPosition(0, startPos);
+        m_lineRenderer.SetPosition(1, endPos);
+    }
+
+    /*private void Start()
     {
         staffCast = false;
         cam = Camera.main;
@@ -54,7 +102,7 @@ public class Staff : MonoBehaviour
             // Проверяем контакт с врагами
             RaycastHit2D hit = Physics2D.Raycast(currentLaser.transform.position, direction, distance, enemyLayer);
 
-            /*if (hit)
+            *//*if (hit)
             {
                 // Наносим урон врагу, если луч столкнулся с ним
                 EnemyController enemy = hit.collider.GetComponent<EnemyController>();
@@ -62,7 +110,7 @@ public class Staff : MonoBehaviour
                 {
                     enemy.TakeDamage(laserDamage);
                 }
-            }*/
+            }*//*
         }
 
 
@@ -72,15 +120,15 @@ public class Staff : MonoBehaviour
             laserMaterial.SetFloat("_Percent", percent);
         }
 
-        /*if (Input.GetMouseButtonUp(0))
+        *//*if (Input.GetMouseButtonUp(0))
         {
             // Уничтожаем созданный луч, если кнопка мыши отпущена
             Destroy(currentLaser.gameObject);
-        }*/
+        }*//*
     }
 
 
-    /*void Start()
+    *//*void Start()
     {
         coll = GetComponent<Collider2D>();
         coll.enabled = false;
@@ -100,6 +148,6 @@ public class Staff : MonoBehaviour
     {
         staffCast = false;
         // Уничтожаем созданный луч, если кнопка мыши отпущена
-        Destroy(currentLaser.gameObject);
+        //Destroy(currentLaser.gameObject);
     }
 }
