@@ -5,6 +5,7 @@ public class TestEnemy : MonoBehaviour
     public Transform agro; // —сылка на Transform agro
     private GameObject player;
     public float speed = 2f; // —корость движени€ врага
+    public int hpEnemy;
 
     private Vector3 direction;
 
@@ -60,5 +61,10 @@ public class TestEnemy : MonoBehaviour
         {
             speed = 2f;
         }
+    }
+
+    public void MageWantBlood()
+    {
+
     }
 }

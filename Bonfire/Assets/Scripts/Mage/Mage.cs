@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class Mage : MonoBehaviour
 {
-    
+    public GameObject lightBolt;
+    public GameObject golem;
+
+    public Transform shotPoint;
     void Start()
     {
         
@@ -12,17 +15,30 @@ public class Mage : MonoBehaviour
 
     void Update()
     {
+        SkillsMage();
+    }
+
+    void SkillsMage()
+    {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            print("Q key was pressed");
+            Instantiate(lightBolt, shotPoint.position, transform.rotation);
         }
         else if (Input.GetKeyDown(KeyCode.E))
         {
-            print("E key was pressed");
+            BloodMagic();
         }
         else if (Input.GetKeyDown(KeyCode.F))
         {
-            print("F key was pressed");
+            Instantiate(golem, Input.mousePosition, transform.rotation);
+        }
+    }
+
+    void BloodMagic()
+    {
+        foreach (GameObject gameObj in GameObject.FindGameObjectsWithTag("Enemy"))
+        {
+            gameObj.GetComponent<TestEnemy>().MageWantBlood();
         }
     }
 }
