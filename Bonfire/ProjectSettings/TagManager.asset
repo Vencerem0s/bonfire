@@ -9,6 +9,8 @@ TagManager:
   - square
   - wall
   - Enemy
+  - lightBolt
+  - golem
   layers:
   - Default
   - TransparentFX

@@ -25,7 +25,7 @@ public class Staff : MonoBehaviour
 
         RaycastHit2D _hit = Physics2D.Raycast(laserFireStartPoint.position, direction.normalized, direction.magnitude);
 
-        if(_hit)
+        if(_hit && _hit.collider.name != "Aura")
         {
             m_lineRenderer.SetPosition(1, _hit.point);
         }

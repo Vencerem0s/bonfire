@@ -5,7 +5,7 @@ public class TestEnemy : MonoBehaviour
     public Transform agro; // —сылка на Transform agro
     private GameObject player;
     public float speed = 2f; // —корость движени€ врага
-    public int hpEnemy;
+    //public int hpEnemy;
 
     private Vector3 direction;
 
@@ -29,17 +29,21 @@ public class TestEnemy : MonoBehaviour
             transform.position += direction * speed * Time.deltaTime;
 
         }
+        if (agro != player.transform)
+        {
+            speed = 2f;
+        }
     }
 
     private void TakeAgro()
     {
-        if (GameObject.Find("Golem"))
+        if (GameObject.Find("golem(Clone)"))
         {
-            agro = GameObject.Find("Golem").GetComponent<Transform>();
+            agro = GameObject.Find("golem(Clone)").GetComponent<Transform>();
         }
-        else if (GameObject.Find("lightBolt"))
+        else if (GameObject.Find("lightBolt(Clone)"))
         {
-            agro = GameObject.Find("lightBolt").GetComponent<Transform>();
+            agro = GameObject.Find("lightBolt(Clone)").GetComponent<Transform>();
         }
         else
         {
@@ -61,10 +65,5 @@ public class TestEnemy : MonoBehaviour
         {
             speed = 2f;
         }
-    }
-
-    public void MageWantBlood()
-    {
-
     }
 }
