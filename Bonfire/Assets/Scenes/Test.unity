@@ -2216,6 +2216,9 @@ MonoBehaviour:
   lightBolt: {fileID: 4743956680647433442, guid: 7a32ddd0ffef7a348b1e9231a5d9aa8a, type: 3}
   golem: {fileID: 7448785708730277508, guid: 4478338d9f4bf2947924451307a5b0f1, type: 3}
   aura: {fileID: 762514036}
+  cdspell1: 0
+  cdspell2: 0
+  cdulta: 0
   hpMage: 0
   shotPoint: {fileID: 6592295166478308167}
 --- !u!58 &8438061189636033540

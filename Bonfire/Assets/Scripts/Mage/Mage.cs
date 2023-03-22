@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Mage : MonoBehaviour
@@ -8,7 +7,7 @@ public class Mage : MonoBehaviour
 
     private Transform aurascale;
     private Vector2 aurascale1, aurascale0;
-    //private Vector2 aurascale0;
+    [SerializeField] private float cdspell1, cdspell2, cdulta;
 
     public int hpMage;
 
@@ -21,29 +20,40 @@ public class Mage : MonoBehaviour
         hpMage = 100;
         aurascale = aura.GetComponent<Transform>();
         aurascale.localScale = aurascale0;
+        cdspell1 = 5f;
+        cdspell2 = 6f;
+        cdulta = 20f;
     }
 
     void Update()
     {
         StartCoroutine(ActivateAura());
         SkillsMage();
+        MovementAnimation();
     }
 
     void SkillsMage()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        //тут надо включать анимации способностей
+        if (Input.GetKeyDown(KeyCode.Q) && cdspell1 == 5f)
         {
             Instantiate(lightBolt, shotPoint.position, transform.rotation);
+            StartCoroutine(CDSpellMage(cdspell1));
+            cdspell1 = 0f;
         }
-        else if (Input.GetKeyDown(KeyCode.E))
+        else if (Input.GetKeyDown(KeyCode.E) && cdspell2 == 6f)
         {
             BloodMagic();
+            StartCoroutine(CDSpellMage(cdspell2));
+            cdspell2 = 0f;
         }
-        else if (Input.GetKeyDown(KeyCode.F))
+        else if (Input.GetKeyDown(KeyCode.F) && cdulta == 20f)
         {
             Vector2 screenPosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
             Vector2 worldPosition = Camera.main.ScreenToWorldPoint(screenPosition);
             Instantiate(golem, worldPosition, transform.rotation);
+            StartCoroutine(CDSpellMage(cdulta));
+            cdulta = 0f;
         }
     }
 
@@ -52,7 +62,9 @@ public class Mage : MonoBehaviour
         foreach (GameObject gameObj in GameObject.FindGameObjectsWithTag("Enemy"))
         {
             gameObj.GetComponent<Enemy>().TakeDamage(50);
+            gameObj.GetComponent<Enemy>().BloodLostAnimation();
             hpMage += 10;
+            //запуск анимации вокруг игрока аура получения крови
         }
     }
 
@@ -64,10 +76,43 @@ public class Mage : MonoBehaviour
         if (magePos1 != magePos2)
         {
             aurascale.localScale = aurascale0;
+            //запуск анимации ауры
         }
         else
         {
             aurascale.localScale = aurascale1;
+            //запуск анимации угасания ауры
+        }
+    }
+
+    private void MovementAnimation()
+    {
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S))
+        {
+            //запуск анимации ходьбы
+        }
+
+        if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.S))
+        {
+            //запуск анимации idle
+        }
+    }
+
+    IEnumerator CDSpellMage(float cdtime)
+    {
+        yield return new WaitForSeconds(cdtime);
+        
+        if(cdtime == 5f)
+        {
+            cdspell1 = cdtime;
+        }
+        else if (cdtime == 6f)
+        {
+            cdspell1 = cdtime;
+        }
+        else if (cdtime == 20f)
+        {
+            cdspell1 = cdtime;
         }
     }
 }

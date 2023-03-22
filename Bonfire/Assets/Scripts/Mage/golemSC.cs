@@ -18,7 +18,7 @@ public class golemSC : MonoBehaviour
 
     void Start()
     {
-        enemy = GameObject.FindGameObjectsWithTag("Enemy");
+        //enemy = GameObject.FindGameObjectsWithTag("Enemy");
         //golem = GetComponent<NavMeshAgent>();
     }
 
@@ -48,6 +48,13 @@ public class golemSC : MonoBehaviour
 
     private void FindClosestEnemy()//Transform FindClosestEnemy()
     {
+        enemy = GameObject.FindGameObjectsWithTag("Enemy");
+
+        if (enemy == null)
+        {
+            return;
+        }
+
         float distance = 0f;//Mathf.Infinity;
         Vector3 position = transform.position;
         foreach (GameObject go in enemy)
