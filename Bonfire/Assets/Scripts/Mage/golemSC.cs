@@ -8,9 +8,8 @@ public class golemSC : MonoBehaviour
 {
     public Transform agro; // Ссылка на Transform agro
     private GameObject[] enemy;
-
+    public GameObject explosionGolem;
     private GameObject closest;
-    //private NavMeshAgent golem;
 
     public float speed = 2f;
 
@@ -18,15 +17,15 @@ public class golemSC : MonoBehaviour
 
     void Start()
     {
+        GolemStun();
+        //Instantiate(explosionGolem); //запуск префаба взрыва от появления
+
         //enemy = GameObject.FindGameObjectsWithTag("Enemy");
         //golem = GetComponent<NavMeshAgent>();
     }
 
     void Update()
     {
-        //FindClosestEnemy();
-        //ChooseSmash();
-        //StartCoroutine(GetClosestTarget());
         Movement();
     }
 
@@ -37,16 +36,14 @@ public class golemSC : MonoBehaviour
             direction = agro.position - transform.position;
             direction.Normalize();
             transform.position += direction * speed * Time.deltaTime;
-
         }
         else
         {
             FindClosestEnemy();
-            //StartCoroutine(GetClosestTarget());
         }
     }
 
-    private void FindClosestEnemy()//Transform FindClosestEnemy()
+    private void FindClosestEnemy()
     {
         enemy = GameObject.FindGameObjectsWithTag("Enemy");
 
@@ -55,7 +52,7 @@ public class golemSC : MonoBehaviour
             return;
         }
 
-        float distance = 0f;//Mathf.Infinity;
+        float distance = 0f;
         Vector3 position = transform.position;
         foreach (GameObject go in enemy)
         {
@@ -67,71 +64,31 @@ public class golemSC : MonoBehaviour
                 distance = curDistance;
             }
         }
-        //return agro;
     }
 
-    /*private void ChooseSmash()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (GameObject.Find("Golem(Clone)"))
+        if (collision.gameObject.CompareTag("Enemy") && collision.name == agro.name)
         {
-            agro = GameObject.Find("Golem(Clone)").GetComponent<Transform>();
+            //Анимация атаки
+            speed = 0f;
         }
-        else if (GameObject.Find("lightBolt(Clone)"))
-        {
-            agro = GameObject.Find("lightBolt(Clone)").GetComponent<Transform>();
-        }
-        else
-        {
-            agro = enemy.transform;
-        }
-    }*/
+    }
 
-    /*IEnumerator GetClosestTarget()
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        GameObject[] gameobj = GameObject.FindGameObjectsWithTag("Enemy");
-        float tmpDist = float.MaxValue;
-        GameObject currentTarget = null;
-        for (int i = 0; i < gameobj.Length; i++)
+        if (collision.gameObject.CompareTag("Enemy") && collision.name == agro.name)
         {
-            if (golem.SetDestination(gameobj[i].transform.position))
-            {
-                //ждем пока вычислится путь до цели
-                while (golem.pathPending)
-                {
-                    yield return null;
-                }
-                Debug.Log(golem.pathStatus.ToString());
-                // проверяем, можно ли дойти до цели
-                if (golem.pathStatus != NavMeshPathStatus.PathInvalid)
-                {
-                    float pathDistance = 0;
-                    //вычисляем длину пути
-                    pathDistance += Vector3.Distance(transform.position, golem.path.corners[0]);
-                    for (int j = 1; j < golem.path.corners.Length; j++)
-                    {
-                        pathDistance += Vector3.Distance(golem.path.corners[j - 1], golem.path.corners[j]);
-                    }
-
-                    if (tmpDist > pathDistance)
-                    {
-                        tmpDist = pathDistance;
-                        currentTarget = gameobj[i];
-                        golem.ResetPath();
-                    }
-                }
-                else
-                {
-                    Debug.Log("невозможно дойти до " + gameobj[i].name);
-                }
-
-            }
-
+            //Анимация атаки
+            speed = 2f;
         }
-        if (currentTarget != null)
+    }
+
+    private void GolemStun()
+    {
+        foreach (GameObject gameObj in GameObject.FindGameObjectsWithTag("Enemy"))
         {
-            //golem.SetDestination(currentTarget.transform.position);
-            agro = currentTarget.transform;
-            //... дальше ваша логика движения к цели
+            gameObj.GetComponent<TestEnemy>().Stun(2f);
         }
-    }*/
+    }
 }

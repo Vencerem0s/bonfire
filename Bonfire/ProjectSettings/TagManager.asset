@@ -11,6 +11,7 @@ TagManager:
   - Enemy
   - lightBolt
   - golem
+  - darkSphere
   layers:
   - Default
   - TransparentFX

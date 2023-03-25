@@ -1,21 +1,30 @@
+using System.Collections;
 using UnityEngine;
 
 public class TestEnemy : MonoBehaviour
 {
     public Transform agro; // Ссылка на Transform agro
     private GameObject player;
-    public float speed = 2f; // Скорость движения врага
-    //public int hpEnemy;
+    public float speed; // Скорость движения врага
+    
+    private float stun;
 
     private Vector3 direction;
 
+    [SerializeField] private float damage;
+
     private void Start()
     {
+        stun = 0f;
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
     void Update()
     {
+        if (stun > 0f)
+        {
+            return;
+        }
         TakeAgro();
         EnemMovement();
     }
@@ -51,18 +60,34 @@ public class TestEnemy : MonoBehaviour
         }
     }
 
+    public void Stun(float secs)
+    {
+        stun = secs;
+        StartCoroutine(StunCoroutine());
+    }
+
+    IEnumerator StunCoroutine()
+    {
+        //запуск анимации стана
+        yield return new WaitForSeconds(stun);
+        //запуск анимации ходьбы
+        stun = 0f;
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("golem") || other.gameObject.CompareTag("lightBolt"))
         {
+            //анимация атаки
             speed = 0f;
         }
     }
-
-    private void OnTriggerExit2D(Collider2D other)
+    
+    void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("golem") || other.gameObject.CompareTag("lightBolt"))
         {
+            //анимация ходьбы
             speed = 2f;
         }
     }
