@@ -39,7 +39,11 @@ public class Attacks : MonoBehaviour
         {
             bow.Shoot();
         }
-        else if (weapon.name == "Staff")
+    }
+
+    private void OnMouseDrag()
+    {
+        if (weapon.name == "Staff")
         {
             staff.StaffSpell();
         }

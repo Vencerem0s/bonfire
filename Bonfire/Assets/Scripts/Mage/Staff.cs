@@ -1,105 +1,93 @@
+//скрипт по атаке посохом, выpывается из функции Attacks()
+
+using System.Collections;
 using UnityEngine;
 
 public class Staff : MonoBehaviour
 {
-    //private Collider2D coll;
+    public Transform sphereFireStartPoint;
+    public GameObject darkSphere;
 
-    public GameObject laserPrefab;
+    private bool sphereFire;
 
-    // Максимальная длина луча
-    public float maxLaserDistance = 5f;
-
-    // Урон, наносимый врагу при контакте с лучом
-    public float laserDamage = 10f;
-
-    // Слой, на котором находятся враги
-    public LayerMask enemyLayer;
-
-    // Приватные поля хранящие луч, который был создан, и материал, используемый для его визуализации
-    private LineRenderer currentLaser;
-    private Material laserMaterial;
-
-    // Камера, используемая для определения позиции курсора
-    private Camera cam;
-
-    public bool staffCast;
+    public float dps;
+    private float maxDps, cda;
+    //public Transform laserFireEndPoint;
+    //public LineRenderer m_lineRenderer;
 
     private void Start()
     {
-        staffCast = false;
-        cam = Camera.main;
-        laserMaterial = laserPrefab.GetComponent<LineRenderer>().material;
+        sphereFire = true;
+        cda = 0f;
+        maxDps = 20f;
+        //m_lineRenderer.enabled = false;
     }
 
-    private void Update()
+    /*private void Update()
     {
-        if (staffCast == true)
-        {
-            // Определяем позицию курсора в мировых координатах
-            Vector2 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-
-            // Создаем луч в позиции курсора
-            GameObject laserGo = Instantiate(laserPrefab, mousePos, Quaternion.identity);
-            currentLaser = laserGo.GetComponent<LineRenderer>();
-            currentLaser.SetPosition(0, mousePos);
-
-            // Направляем луч в сторону курсора
-            Vector2 direction = mousePos - (Vector2)currentLaser.transform.position;
-            currentLaser.SetPosition(1, currentLaser.transform.position + (Vector3)direction.normalized * 0.1f);
-
-            // Ограничиваем длину луча
-            float distance = Mathf.Min(direction.magnitude, maxLaserDistance);
-            currentLaser.SetPosition(1, currentLaser.transform.position + (Vector3)direction.normalized * distance);
-
-            // Проверяем контакт с врагами
-            RaycastHit2D hit = Physics2D.Raycast(currentLaser.transform.position, direction, distance, enemyLayer);
-
-            /*if (hit)
-            {
-                // Наносим урон врагу, если луч столкнулся с ним
-                EnemyController enemy = hit.collider.GetComponent<EnemyController>();
-                if (enemy)
-                {
-                    enemy.TakeDamage(laserDamage);
-                }
-            }*/
-        }
-
-
-        if (currentLaser != null)
-        {
-            float percent = (currentLaser.GetPosition(1) - currentLaser.GetPosition(0)).magnitude / maxLaserDistance;
-            laserMaterial.SetFloat("_Percent", percent);
-        }
-
-        /*if (Input.GetMouseButtonUp(0))
-        {
-            // Уничтожаем созданный луч, если кнопка мыши отпущена
-            Destroy(currentLaser.gameObject);
-        }*/
-    }
-
-
-    /*void Start()
-    {
-        coll = GetComponent<Collider2D>();
-        coll.enabled = false;
+        //ShootLaser();
     }*/
 
-    /*void Update()
+    /*void ShootLaser()
     {
-        
+        m_lineRenderer.SetPosition(0, laserFireStartPoint.position);
+        m_lineRenderer.SetPosition(1, laserFireEndPoint.position);
+
+        Vector2 direction = laserFireEndPoint.position - laserFireStartPoint.position;
+
+        RaycastHit2D _hit = Physics2D.Raycast(laserFireStartPoint.position, direction.normalized, direction.magnitude);
+
+        if(_hit && _hit.collider.name != "Aura")
+        {
+            m_lineRenderer.SetPosition(1, _hit.point);
+        }
     }*/
 
     public void StaffSpell()
     {
-        staffCast = true;
+        if (sphereFire == false)
+        {
+            return;
+        }
+        //print("zaryad");
+        
+        dps += 0.01f;
+        cda += 0.01f;
+        
+        if (dps >= maxDps)
+        {
+            dps = maxDps;
+        }
+
+        if (cda >= 2f)
+        {
+            cda = 2f;
+        }
+        //из этих скриптов нужно осуществить плавное появление луча
+        //m_lineRenderer.enabled = true;
     }
 
     public void StaffSpellOff()
     {
-        staffCast = false;
-        // Уничтожаем созданный луч, если кнопка мыши отпущена
-        Destroy(currentLaser.gameObject);
+        //здесь два звука, один выстрела при true, второй звук пфф, как при паре, если false
+        if (sphereFire)
+        {
+            //print($"dps = {dps} и cda {cda}");
+            Instantiate(darkSphere, sphereFireStartPoint.position, transform.rotation);
+            StartCoroutine(CDSphere());
+        }
+        else
+        {
+
+        }
+        //m_lineRenderer.enabled = false;
+    }
+
+    IEnumerator CDSphere()
+    {
+        sphereFire = false;
+        yield return new WaitForSeconds(cda); //yield return new WaitForSeconds(2f);
+        cda = dps = 0f;
+        sphereFire = true;
     }
 }
