@@ -4,7 +4,7 @@ public class Bow : MonoBehaviour
 {
     public GameObject arrow;
     public Transform shotPointDiagonalRight, shotPointDiagonalLeft;
-    public int arrowDamage;
+    public float arrowDamage;
 
 
     void Start()

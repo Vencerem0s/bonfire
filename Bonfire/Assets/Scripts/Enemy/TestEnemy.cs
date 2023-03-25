@@ -5,15 +5,13 @@ public class TestEnemy : MonoBehaviour
 {
     public Transform agro; // Ссылка на Transform agro
     private GameObject player;
-<<<<<<< HEAD
-    public float speed = 2f; // Скорость движения врага
+    //public float speed = 2f; // Скорость движения врага
     private Enemy enemy;
     private Bow bow;
-=======
     public float speed; // Скорость движения врага
     
     private float stun;
->>>>>>> 044ecca3493a06cb1459e9b092e3e2628fe00c55
+
 
     private Vector3 direction;
 
@@ -21,12 +19,9 @@ public class TestEnemy : MonoBehaviour
 
     private void Start()
     {
-<<<<<<< HEAD
         bow = GameObject.Find("Bow").GetComponent<Bow>();
         enemy = GetComponent<Enemy>();
-=======
         stun = 0f;
->>>>>>> 044ecca3493a06cb1459e9b092e3e2628fe00c55
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -70,14 +65,14 @@ public class TestEnemy : MonoBehaviour
         }
     }
 
-<<<<<<< HEAD
-   IEnumerator Stun()
+    IEnumerator Stun()
     {
         speed = 0f;
         enemy.TakeDamage(50);
         yield return new WaitForSeconds(2f);
         speed = 2f;
-=======
+    }
+
     public void Stun(float secs)
     {
         stun = secs;
@@ -90,19 +85,15 @@ public class TestEnemy : MonoBehaviour
         yield return new WaitForSeconds(stun);
         //запуск анимации ходьбы
         stun = 0f;
->>>>>>> 044ecca3493a06cb1459e9b092e3e2628fe00c55
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("golem") || other.gameObject.CompareTag("lightBolt"))
         {
-<<<<<<< HEAD
             player.GetComponent<Hunter>().takeDamage = true;
             //StartCoroutine(player.GetComponent<HunterSkills>().DelayTime());
-=======
             //анимация атаки
->>>>>>> 044ecca3493a06cb1459e9b092e3e2628fe00c55
             speed = 0f;
         }else if (other.gameObject.CompareTag("Boar"))
         {

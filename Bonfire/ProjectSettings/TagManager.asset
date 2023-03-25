@@ -3,21 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - sword
-  - attach
-  - square
-  - wall
-  - Enemy
-<<<<<<< HEAD
-  - Boar
-  - Arrow
-  - Bow
-=======
-  - lightBolt
-  - golem
-  - darkSphere
->>>>>>> 044ecca3493a06cb1459e9b092e3e2628fe00c55
+  tags: []
   layers:
   - Default
   - TransparentFX
