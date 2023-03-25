@@ -5,14 +5,12 @@ public class Movement : MonoBehaviour
     private Rigidbody2D rb;
     public Vector2 moveVector;
     public float speed;
-    
-
+    private GameObject player;
     private Transform saxeTrans;
-    //public GameObject hunter;
+    private Hunter _hunter;
 
     void Start()
     {
-        
         saxeTrans = gameObject.transform;
         rb = GetComponent<Rigidbody2D>();
     }
@@ -29,6 +27,7 @@ public class Movement : MonoBehaviour
         moveVector.x = Input.GetAxis("Horizontal");
         moveVector.y = Input.GetAxis("Vertical");
         rb.velocity = new Vector2(moveVector.x * speed, moveVector.y * speed);
+       
     }
 
     private void LookAtMouse()
@@ -40,13 +39,5 @@ public class Movement : MonoBehaviour
 
    
 
-    //void OnMouseDown()
-    //{
-    //    Debug.Log("piu piu");
-    //}
-
-    //void OnMouseUp()
-    //{
-    //    Debug.Log("noatach");
-    //}
+    
 }

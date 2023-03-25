@@ -4,25 +4,31 @@ using UnityEngine;
 
 public class Hunter : MonoBehaviour
 {
-    
+    public int health;
+    public bool takeDamage;
+    private HunterSkills hunterSkills;
+
     void Start()
     {
-        
+        takeDamage = false;
+        hunterSkills = GetComponent<HunterSkills>();
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            print("Q key was pressed");
+            hunterSkills.TrippleShoot();
         }
         else if (Input.GetKeyDown(KeyCode.E))
         {
-            print("E key was pressed");
+            hunterSkills.SpawnBoar();
         }
         else if (Input.GetKeyDown(KeyCode.F))
         {
             print("F key was pressed");
         }
     }
+
+    
 }

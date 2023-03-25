@@ -25,7 +25,7 @@ public class Attacks : MonoBehaviour
             GameObject.Find("Hunter").GetComponent<Movement>().speed = 7f;
             weapon = GameObject.Find("Bow");
             bow = weapon.GetComponent<Bow>();
-            Debug.Log("функция для атаки охотника");
+            //Debug.Log("функция для атаки охотника");
         }
         else
         {

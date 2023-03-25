@@ -9,6 +9,9 @@ TagManager:
   - square
   - wall
   - Enemy
+  - Boar
+  - Arrow
+  - Bow
   layers:
   - Default
   - TransparentFX

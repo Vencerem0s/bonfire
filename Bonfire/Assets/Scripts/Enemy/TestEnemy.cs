@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class TestEnemy : MonoBehaviour
@@ -5,11 +6,15 @@ public class TestEnemy : MonoBehaviour
     public Transform agro; // —сылка на Transform agro
     private GameObject player;
     public float speed = 2f; // —корость движени€ врага
+    private Enemy enemy;
+    private Bow bow;
 
     private Vector3 direction;
 
     private void Start()
     {
+        bow = GameObject.Find("Bow").GetComponent<Bow>();
+        enemy = GetComponent<Enemy>();
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -26,7 +31,6 @@ public class TestEnemy : MonoBehaviour
             direction = agro.position - transform.position;
             direction.Normalize();
             transform.position += direction * speed * Time.deltaTime;
-
         }
     }
 
@@ -46,11 +50,27 @@ public class TestEnemy : MonoBehaviour
         }
     }
 
+   IEnumerator Stun()
+    {
+        speed = 0f;
+        enemy.TakeDamage(50);
+        yield return new WaitForSeconds(2f);
+        speed = 2f;
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            player.GetComponent<Hunter>().takeDamage = true;
+            //StartCoroutine(player.GetComponent<HunterSkills>().DelayTime());
             speed = 0f;
+        }else if (other.gameObject.CompareTag("Boar"))
+        {
+            StartCoroutine(Stun());
+        }else if (other.gameObject.CompareTag("Arrow"))
+        {
+            enemy.TakeDamage(bow.arrowDamage);
         }
     }
 
@@ -59,6 +79,8 @@ public class TestEnemy : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             speed = 2f;
+            player.GetComponent<Hunter>().takeDamage = false;
+            player.GetComponent<HunterSkills>().StartAccumulationOfConcentration();
         }
     }
 }
