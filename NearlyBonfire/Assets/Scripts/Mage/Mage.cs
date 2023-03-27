@@ -17,8 +17,8 @@ public class Mage : MonoBehaviour
     void Start()
     {
         mana = 0f;
-        aurascale1 = new Vector2(1f, 1f);
-        aurascale0 = new Vector2(0f, 0f);
+        aurascale1 = new Vector3(1f, 1f, 1f);
+        aurascale0 = new Vector3(0f, 0f, 0f);
         aurascale = aura.GetComponent<Transform>();
         aurascale.localScale = aurascale0;
         cdspell1 = 5f;

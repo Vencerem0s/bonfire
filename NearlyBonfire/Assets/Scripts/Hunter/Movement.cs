@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    private Rigidbody2D rb;
+    private Rigidbody rb;
     public Vector2 moveVector;
     public float speed;
     private GameObject player;
@@ -12,7 +12,7 @@ public class Movement : MonoBehaviour
     void Start()
     {
         saxeTrans = gameObject.transform;
-        rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody>();
     }
 
     
@@ -32,6 +32,7 @@ public class Movement : MonoBehaviour
 
     private void LookAtMouse()
     {
+        
         var direction = Input.mousePosition - Camera.main.WorldToScreenPoint(saxeTrans.position); // Нахождение катетов для расчёта тангенса, а в последствии и градусов угла. 
         var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // Нахождение тангенса угла и перевод его в градусы.
         saxeTrans.rotation = Quaternion.AngleAxis(angle, Vector3.forward); // Вращение объекта на полученное значение градусов.
