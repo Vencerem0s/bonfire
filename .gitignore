@@ -3,14 +3,12 @@
 ###
 [Aa]ssets/AssetStoreTools*
 [Bb]uild/
-[Ff]ileContentIndex/
 [Bb]uilds/
 [Ll]ibrary/
 [Ll]ocal[Cc]ache/
 [Ll]ogs/
 [Oo]bj/
 [Tt]emp/
-[Vv]s/
 [Uu]nityGenerated/
 [Uu]ser[Ss]ettings/
 
@@ -38,7 +36,6 @@ sysinfo.txt
 [Ee]xportedObj/
 .consulo/
 *.tmp
-*.vsidx
 *.pdb
 *.opendb
 *.VC.db
