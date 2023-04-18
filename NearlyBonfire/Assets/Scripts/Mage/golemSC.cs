@@ -6,18 +6,32 @@ using UnityEngine.AI;
 
 public class golemSC : MonoBehaviour
 {
-    public Transform agro; // Ссылка на Transform agro
+    private Transform agro; // Ссылка на Transform agro
     private GameObject[] enemy;
-    public GameObject explosionGolem;
-    private GameObject closest;
+
+    //public GameObject explosionGolem;
+    //private GameObject closest;
+
+    //[SerializeField] private float hpGolem;
+
+    private Animator gAnimator;
+
+    private Enemy curHealth;
 
     public float speed = 2f;
 
     private Vector3 direction;
 
+    private NavMeshAgent agent;
+
     void Start()
     {
+        //StartCoroutine(BeforeStart());
         GolemStun();
+
+        agent = GetComponent<NavMeshAgent>();
+        curHealth = GetComponent<Enemy>();
+        gAnimator = GetComponent<Animator>();
         //Instantiate(explosionGolem); //запуск префаба взрыва от появления
 
         //enemy = GameObject.FindGameObjectsWithTag("Enemy");
@@ -26,6 +40,12 @@ public class golemSC : MonoBehaviour
 
     void Update()
     {
+        if (curHealth.health <= 0)
+        {
+            DeafaultAnim();
+            gAnimator.SetBool("Die", true);
+            print("dead");
+        }
         Movement();
     }
 
@@ -33,9 +53,13 @@ public class golemSC : MonoBehaviour
     {
         if (agro)
         {
-            direction = agro.position - transform.position;
+            /*direction = agro.position - transform.position;
             direction.Normalize();
-            transform.position += direction * speed * Time.deltaTime;
+            transform.position += direction * speed * Time.deltaTime;*/
+            agent.SetDestination(agro.position);
+            transform.LookAt(new Vector3(agro.position.x, 0f, agro.position.z));
+            //gAnimator.SetBool("Idle", false);
+            gAnimator.SetFloat("Walk", agent.remainingDistance);
         }
         else
         {
@@ -45,6 +69,8 @@ public class golemSC : MonoBehaviour
 
     private void FindClosestEnemy()
     {
+        DeafaultAnim();
+
         enemy = GameObject.FindGameObjectsWithTag("Enemy");
 
         if (enemy == null)
@@ -70,7 +96,8 @@ public class golemSC : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy") && collision.name == agro.name)
         {
-            //Анимация атаки
+            DeafaultAnim();
+            gAnimator.SetBool("Attack", true);//Анимация атаки
             speed = 0f;
         }
     }
@@ -79,16 +106,34 @@ public class golemSC : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy") && collision.name == agro.name)
         {
-            //Анимация атаки
+            DeafaultAnim();//Отмена анимаций
             speed = 2f;
         }
     }
 
     private void GolemStun()
     {
-        foreach (GameObject gameObj in GameObject.FindGameObjectsWithTag("Enemy"))
+        /*foreach (GameObject gameObj in GameObject.FindGameObjectsWithTag("Enemy"))
         {
             gameObj.GetComponent<TestEnemy>().Stun(2f);
-        }
+        }*/
+    }
+
+    private void DeafaultAnim()
+    {
+        gAnimator.SetBool("Idle", true);
+    }
+
+    IEnumerator BeforeStart()
+    {
+        speed = 0f;
+        yield return new WaitForSeconds(2f);
+        speed = 2f;
+    }
+
+    public void BeforeDie()
+    {
+        GameObject.FindGameObjectWithTag("Player").GetComponent<Mage>().GolemAura(false, null);
+        Destroy(gameObject);
     }
 }

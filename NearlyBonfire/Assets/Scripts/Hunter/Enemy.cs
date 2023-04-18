@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public float health;
-    public GameObject deathPrefab;
+    //public GameObject deathPrefab;
     private float maxHealth;
 
     private void Start()

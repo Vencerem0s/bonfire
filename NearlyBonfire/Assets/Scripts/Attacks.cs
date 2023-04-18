@@ -45,7 +45,7 @@ public class Attacks : MonoBehaviour
     {
         if (weapon.name == "Staff")
         {
-            staff.StaffSpell();
+            //staff.StaffSpell();
         }
     }
 
@@ -53,7 +53,7 @@ public class Attacks : MonoBehaviour
     {
         if (weapon.name == "Staff")
         {
-            staff.StaffSpellOff();
+            //staff.StaffSpellOff();
         }
     }
 }
