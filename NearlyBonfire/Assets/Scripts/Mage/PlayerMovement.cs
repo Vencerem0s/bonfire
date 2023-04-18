@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         Move();
-        LookAtMouse();
+        //LookAtMouse();
     }
 
     void Move()
@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
     {
         var direction = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position); // Нахождение катетов для расчёта тангенса, а в последствии и градусов угла. 
         var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // Нахождение тангенса угла и перевод его в градусы.
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.down); // Вращение объекта на полученное значение градусов.
+        transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.down); // Вращение объекта на полученное значение градусов.
 
 
         //RaycastHit hit;

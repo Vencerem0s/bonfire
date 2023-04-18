@@ -8,11 +8,18 @@ TagManager:
   - lightBolt
   - darkSphere
   - golem
+  - Enemy
+  - Boar
+  - Bow
+  - Arrow
+  - trap
+  - testCol
+  - trippleArrow
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Enemy
   - Water
   - UI
   - 
@@ -44,4 +51,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Enemy
+    uniqueID: 3663472407
     locked: 0
