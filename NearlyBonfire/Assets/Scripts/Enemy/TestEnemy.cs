@@ -4,29 +4,28 @@ using UnityEngine;
 public class TestEnemy : MonoBehaviour
 {
     public Transform agro; // Ссылка на Transform agro
-    private GameObject player;
-    //public float speed = 2f; // Скорость движения врага
-    private Enemy enemy;
-    private Bow bow;
     public float speed; // Скорость движения врага
 
-    private float stun;
+    private GameObject _player;
+    private Enemy _enemy;
+    private Arrow _arrow;
+    private float _stun;
+    private Vector3 _direction;
+    [SerializeField] private float _damage;
 
-    private Vector3 direction;
 
-    [SerializeField] private float damage;
+
 
     private void Start()
     {
-        bow = GameObject.Find("Bow").GetComponent<Bow>();
-        enemy = GetComponent<Enemy>();
-        stun = 0f;
-        player = GameObject.FindGameObjectWithTag("Player");
+        _stun = 0f;
+        _enemy = GetComponent<Enemy>();
+        _player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    void Update()
+    private void Update()
     {
-        if (stun > 0f)
+        if (_stun > 0f)
         {
             return;
         }
@@ -38,11 +37,11 @@ public class TestEnemy : MonoBehaviour
     {
         if (agro)
         {
-            direction = agro.position - transform.position;
-            direction.Normalize();
-            transform.position += direction * speed * Time.deltaTime;
+            _direction = agro.position - transform.position;
+            _direction.Normalize();
+            transform.position += _direction * speed * Time.deltaTime;
         }
-        if (agro != player.transform)
+        if (agro != _player.transform)
         {
             speed = 2f;
         }
@@ -60,56 +59,60 @@ public class TestEnemy : MonoBehaviour
         }
         else
         {
-            agro = player.transform;
+            agro = _player.transform;
         }
     }
 
-    //IEnumerator Stun()
-    //{
-    //    speed = 0f;
-    //    enemy.TakeDamage(50);
-    //    yield return new WaitForSeconds(2f);
-    //    speed = 2f;
-    //}
     public void Stun(float secs)
     {
-        stun = secs;
+        _stun = secs;
         StartCoroutine(StunCoroutine());
     }
 
-    IEnumerator StunCoroutine()
+    private IEnumerator StunCoroutine()
     {
         //запуск анимации стана
-        yield return new WaitForSeconds(stun);
+        yield return new WaitForSeconds(_stun);
         //запуск анимации ходьбы
-        stun = 0f;
+        _stun = 0f;
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("golem") || other.gameObject.CompareTag("lightBolt"))
         {
-            player.GetComponent<Hunter>().takeDamage = true;
-            //StartCoroutine(player.GetComponent<HunterSkills>().DelayTime());
+            _player.GetComponent<Hunter>().takeDamage = true;
             //анимация атаки
             speed = 0f;
-        }else if (other.gameObject.CompareTag("Boar"))
+        }
+        else if (other.gameObject.CompareTag("Boar"))
         {
             Stun(2f);
-        }else if (other.gameObject.CompareTag("Arrow"))
+        }
+        else if (other.gameObject.CompareTag("Arrow"))
         {
-            enemy.TakeDamage(bow.arrowDamage);
+            _enemy.TakeDamage(_player.GetComponent<Hunter>().DamageCalculation());
+        }
+        else if (other.gameObject.CompareTag("trippleArrow"))
+        {
+            _enemy.TakeDamage(_enemy.health);
+        }
+        else if (other.gameObject.CompareTag("trap"))
+        {
+            Stun(3f);
+            _enemy.TakeDamage(5f);
+            _player.GetComponent<Hunter>().concentration += 10f;
         }
     }
-    
-    void OnTriggerExit2D(Collider2D other)
+
+    private void OnCollisionExit(Collision other)
     {
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("golem") || other.gameObject.CompareTag("lightBolt"))
         {
             //анимация ходьбы
             speed = 2f;
-            player.GetComponent<Hunter>().takeDamage = false;
-            player.GetComponent<HunterSkills>().StartAccumulationOfConcentration();
+            _player.GetComponent<Hunter>().takeDamage = false;
         }
     }
+
 }

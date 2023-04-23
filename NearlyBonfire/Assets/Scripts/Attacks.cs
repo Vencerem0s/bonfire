@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class Attacks : MonoBehaviour
 {
-    private GameObject weapon;
-    private Bow bow;
+    /*private GameObject weapon;
+    //private Bow bow;
     private Staff staff;
 
     private void Start()
@@ -24,7 +24,7 @@ public class Attacks : MonoBehaviour
         {
             GameObject.Find("Hunter").GetComponent<Movement>().speed = 7f;
             weapon = GameObject.Find("Bow");
-            bow = weapon.GetComponent<Bow>();
+            //bow = weapon.GetComponent<Bow>();
             //Debug.Log("функция для атаки охотника");
         }
         else
@@ -37,7 +37,7 @@ public class Attacks : MonoBehaviour
     {
         if (weapon.name == "Bow")
         {
-            bow.Shoot();
+            //bow.Shoot();
         }
     }
 
@@ -55,5 +55,5 @@ public class Attacks : MonoBehaviour
         {
             //staff.StaffSpellOff();
         }
-    }
+    }*/
 }
