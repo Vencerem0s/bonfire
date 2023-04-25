@@ -21,7 +21,7 @@ public class Mage : MonoBehaviour
 
     void Start()
     {
-        GameObjectsManager.RegisterPlayers(gameObject);
+        GameObjectsManager.Register(gameObject);
         //Staff = GameObject.Find("Staff").GetComponent<Staff>();
         movementscript = GetComponent<IlyaMovement>();
         chAnimator = GetComponent<Animator>();
@@ -60,7 +60,7 @@ public class Mage : MonoBehaviour
         {
             movementscript.SpellDuration(2f);
             chAnimator.SetTrigger("LightSpell");//, true);
-            Instantiate(lightBolt, shotPoint.position, transform.rotation);
+            //Instantiate(lightBolt, shotPoint.position, transform.rotation);
             StartCoroutine(CDSpellMage(cdspell1));
             cdspell1 = 0f;
             //chAnimator.SetBool("LightSpell", false);
@@ -204,5 +204,10 @@ public class Mage : MonoBehaviour
         auraGolem2.SetActive(activity);
         auraGolem3.SetActive(activity);
         golemobj = golemus;
+    }
+
+    public void LightBoltThrow()
+    {
+        Instantiate(lightBolt, shotPoint.position, transform.rotation);
     }
 }

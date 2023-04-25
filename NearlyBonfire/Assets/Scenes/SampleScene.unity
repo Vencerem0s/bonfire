@@ -430,24 +430,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &266562455 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4611537535365882328, guid: efba6647190a69b47ad6f19cae9da4b4, type: 3}
-  m_PrefabInstance: {fileID: 8050885694602214827}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &266562460
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 266562455}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 039671358be1fbd4ba10fd3a6e1fa26c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 10
 --- !u!1 &332407764 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7059740766931976368, guid: eed2a54304c2f0a4ea5935f66d79bf65, type: 3}
@@ -2318,6 +2300,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1953063641721107561, guid: efba6647190a69b47ad6f19cae9da4b4, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 1.9
+      objectReference: {fileID: 0}
     - target: {fileID: 3797845481916037986, guid: efba6647190a69b47ad6f19cae9da4b4, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -2365,6 +2351,10 @@ PrefabInstance:
     - target: {fileID: 4611537535365882328, guid: efba6647190a69b47ad6f19cae9da4b4, type: 3}
       propertyPath: m_Name
       value: Goblin
+      objectReference: {fileID: 0}
+    - target: {fileID: 4611537535365882328, guid: efba6647190a69b47ad6f19cae9da4b4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: efba6647190a69b47ad6f19cae9da4b4, type: 3}

@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using System.Threading.Tasks;
 using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class lightBoltSC : MonoBehaviour
@@ -9,11 +12,15 @@ public class lightBoltSC : MonoBehaviour
     public GameObject explosionAnim;
 
     private Enemy thisHealth;
+    private bool _destroy;
 
     void Start()
     {
-        GameObjectsManager.RegisterPlayers(gameObject);
+        _destroy = true;
+        GameObjectsManager.Register(gameObject);
         thisHealth = GetComponent<Enemy>();
+
+        AgroOnMe();
     }
         
     void Update()
@@ -36,8 +43,25 @@ public class lightBoltSC : MonoBehaviour
         Destroy(gameObject);
     }
 
+    private async void AgroOnMe()
+    {
+        while (_destroy)
+        {
+            if (GameObjectsManager.GetGameObjectByTag("golem").Length <= 0)
+            {
+                GameEventManger.onPlayerThingAgro?.Invoke(gameObject.tag);
+            }
+            await Task.Delay(1000);
+        }
+    }
+
     private void OnDestroy()
     {
-        GameObjectsManager.UnregisterPlayers(gameObject);
+        _destroy = false;
+        GameObjectsManager.Unregister(gameObject);
+        if (GameObjectsManager.GetGameObjectByTag("golem").Length <= 0)
+        {
+            GameEventManger.onPlayerThingAgro?.Invoke("Player");
+        }
     }
 }

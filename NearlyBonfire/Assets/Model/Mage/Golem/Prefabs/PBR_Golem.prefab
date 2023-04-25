@@ -241,6 +241,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce0a677d296a6c04e920f975fb62d4c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 15
+  tag1: Enemy
+  tag2: Enemy
+  tag3: Enemy
 --- !u!1 &1124596519333206
 GameObject:
   m_ObjectHideFlags: 0
@@ -661,6 +665,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce0a677d296a6c04e920f975fb62d4c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 15
+  tag1: Enemy
+  tag2: Enemy
+  tag3: Enemy
 --- !u!1 &1623131121118994
 GameObject:
   m_ObjectHideFlags: 0

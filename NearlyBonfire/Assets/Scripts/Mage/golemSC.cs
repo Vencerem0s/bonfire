@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 using UnityEngine.AI;
+using System.Threading.Tasks;
+using Unity.VisualScripting;
 
 public class golemSC : MonoBehaviour
 {
@@ -24,15 +26,20 @@ public class golemSC : MonoBehaviour
 
     private NavMeshAgent agent;
 
+    private bool _destroy;
+
     void Start()
     {
+        _destroy = true;
         //StartCoroutine(BeforeStart());
-        GameObjectsManager.RegisterPlayers(gameObject);
+        GameObjectsManager.Register(gameObject);
         GolemStun();
 
         agent = GetComponent<NavMeshAgent>();
         curHealth = GetComponent<Enemy>();
         gAnimator = GetComponent<Animator>();
+
+        AgroOnMe();
         //Instantiate(explosionGolem); //запуск префаба взрыва от появления
 
         //enemy = GameObject.FindGameObjectsWithTag("Enemy");
@@ -44,10 +51,14 @@ public class golemSC : MonoBehaviour
         if (curHealth.health <= 0)
         {
             DeafaultAnim();
+            _destroy = false;
             gAnimator.SetBool("Die", true);
-            print("dead");
+            agent.SetDestination(transform.position);
         }
-        Movement();
+        else
+        {
+            Movement();
+        }
     }
 
     private void Movement()
@@ -94,7 +105,16 @@ public class golemSC : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private async void AgroOnMe()
+    {
+        while (_destroy)
+        {
+            GameEventManger.onPlayerThingAgro?.Invoke(gameObject.tag);
+            await Task.Delay(1000);
+        }
+    }
+
+    /*private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.CompareTag("Enemy") && collision.name == agro.name)
         {
@@ -104,14 +124,14 @@ public class golemSC : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerExit(Collider collision)
     {
         if (collision.gameObject.CompareTag("Enemy") && collision.name == agro.name)
         {
             DeafaultAnim();//Отмена анимаций
             speed = 2f;
         }
-    }
+    }*/
 
     private void GolemStun()
     {
@@ -127,18 +147,30 @@ public class golemSC : MonoBehaviour
         gAnimator.SetFloat("Walk", 2f);
     }
 
-    IEnumerator BeforeStart()
+    /*IEnumerator BeforeStart()
     {
         speed = 0f;
         yield return new WaitForSeconds(2f);
         speed = 2f;
-    }
+    }*/
 
     public void BeforeDie()
     {
         //GameObject.FindGameObjectWithTag("Player").GetComponent<Mage>().GolemAura(false, null);
-        GameObjectsManager.GetPlayerThingsObjectByTag("Player")[0].GetComponent<Mage>().GolemAura(false, null);
-        GameObjectsManager.UnregisterPlayers(gameObject);
+        GameObjectsManager.GetGameObjectByTag("Player")[0].GetComponent<Mage>().GolemAura(false, null);
+        GameObjectsManager.Unregister(gameObject);
         Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        if (GameObjectsManager.GetGameObjectByTag("lightBolt").Length > 0)
+        {
+            GameEventManger.onPlayerThingAgro?.Invoke("lightBolt");
+        }
+        else if (GameObjectsManager.GetGameObjectByTag("Player").Length > 0)
+        {
+            GameEventManger.onPlayerThingAgro?.Invoke("Player");
+        }
     }
 }

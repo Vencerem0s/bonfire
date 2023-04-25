@@ -24,7 +24,6 @@ public sealed class GameObjectsManager : MonoBehaviour
     private static GameObjectsManager m_instanse;
 
     private List<GameObject> _allObjects = new List<GameObject>();
-    private List<GameObject> _playerAndThings = new List<GameObject>();
 
     public static void Register(GameObject gameObject)
     {
@@ -59,40 +58,12 @@ public sealed class GameObjectsManager : MonoBehaviour
             if (entry.gameObject.tag == tagName)
             {
                 items.Add(entry);
-                Debug.Log("добавлено");
             }
         }
 
         return items.ToArray();
     }
 
-    public static GameObject[] GetPlayerThingsObjectByTag(string tagName)
-    {
-        List<GameObject> items = new List<GameObject>();
-        foreach (var entry in _instanse._playerAndThings)
-        {
-            if (entry.gameObject.tag == tagName)
-            {
-                items.Clear();
-                items.Add(entry);
-                Debug.Log("игрока взяли");
-            }
-        }
-
-        return items.ToArray();
-    }
-
-    public static void RegisterPlayers(GameObject gameObject)
-    {
-        if (!_instanse._playerAndThings.Contains(gameObject))
-            _instanse._playerAndThings.Add(gameObject);
-    }
-
-    public static void UnregisterPlayers(GameObject gameObject)
-    {
-        if (_instanse._playerAndThings.Contains(gameObject))
-            _instanse._playerAndThings.Remove(gameObject);
-    }
 
     /*private void OnDestroy()
     {

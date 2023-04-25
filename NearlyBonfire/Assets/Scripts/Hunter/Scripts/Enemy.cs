@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        GameObjectsManager.RegisterPlayers(gameObject);
+        GameObjectsManager.Register(gameObject);
         maxHealth = health;
     }
 
@@ -43,6 +43,6 @@ public class Enemy : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameObjectsManager.UnregisterPlayers(gameObject);
+        GameObjectsManager.Unregister(gameObject);
     }
 }
