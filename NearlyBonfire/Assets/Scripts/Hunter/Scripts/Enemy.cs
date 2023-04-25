@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
+        GameObjectsManager.RegisterPlayers(gameObject);
         maxHealth = health;
     }
 
@@ -38,5 +39,10 @@ public class Enemy : MonoBehaviour
     public void BloodLostAnimation()
     {
         //здесь запускаем анимацию потери крови
+    }
+
+    private void OnDestroy()
+    {
+        GameObjectsManager.UnregisterPlayers(gameObject);
     }
 }

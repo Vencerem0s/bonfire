@@ -1,17 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class lightBoltSC : MonoBehaviour
 {
     [SerializeField] float speed = 2f;
     public GameObject explosionAnim;
 
-    private Enemy thisEnemy;
+    private Enemy thisHealth;
 
     void Start()
     {
-        thisEnemy = GetComponent<Enemy>();
+        GameObjectsManager.RegisterPlayers(gameObject);
+        thisHealth = GetComponent<Enemy>();
     }
         
     void Update()
@@ -22,7 +24,7 @@ public class lightBoltSC : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (thisEnemy.health <= 0)
+        if (thisHealth.health <= 0)
         {
             Instantiate(explosionAnim, transform.position, transform.rotation);
             Destroy(gameObject);
@@ -32,5 +34,10 @@ public class lightBoltSC : MonoBehaviour
     private void OnBecameInvisible()
     {
         Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        GameObjectsManager.UnregisterPlayers(gameObject);
     }
 }

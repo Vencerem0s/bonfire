@@ -1417,6 +1417,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3797845481916037986}
   - component: {fileID: 7389716846615654884}
+  - component: {fileID: 5545644588338921158}
+  - component: {fileID: 1953063641721107561}
   m_Layer: 0
   m_Name: Goblin
   m_TagString: Enemy
@@ -1462,6 +1464,41 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!65 &5545644588338921158
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4611537535365882328}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.1785965, y: 2.0976086, z: 1}
+  m_Center: {x: 0.03245926, y: 1.0334625, z: 0}
+--- !u!195 &1953063641721107561
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4611537535365882328}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 2.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &5092490904464790554
 GameObject:
   m_ObjectHideFlags: 0

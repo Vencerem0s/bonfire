@@ -9,7 +9,7 @@ public class Mage : MonoBehaviour
     private IlyaMovement movementscript;
     private Animator chAnimator;
 
-    private Staff Staff;
+    //private Staff Staff;
 
     private Vector3 startGolemPos;
 
@@ -21,7 +21,8 @@ public class Mage : MonoBehaviour
 
     void Start()
     {
-        Staff = GameObject.Find("Staff").GetComponent<Staff>();
+        GameObjectsManager.RegisterPlayers(gameObject);
+        //Staff = GameObject.Find("Staff").GetComponent<Staff>();
         movementscript = GetComponent<IlyaMovement>();
         chAnimator = GetComponent<Animator>();
         mana = 0f;

@@ -27,6 +27,7 @@ public class golemSC : MonoBehaviour
     void Start()
     {
         //StartCoroutine(BeforeStart());
+        GameObjectsManager.RegisterPlayers(gameObject);
         GolemStun();
 
         agent = GetComponent<NavMeshAgent>();
@@ -71,9 +72,10 @@ public class golemSC : MonoBehaviour
     {
         DeafaultAnim();
 
-        enemy = GameObject.FindGameObjectsWithTag("Enemy");
+        //enemy = GameObject.FindGameObjectsWithTag("Enemy");
+        enemy = GameObjectsManager.GetGameObjectByTag("Enemy");
 
-        if (enemy == null)
+        if (enemy.Length <= 0)
         {
             return;
         }
@@ -97,7 +99,7 @@ public class golemSC : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy") && collision.name == agro.name)
         {
             DeafaultAnim();
-            gAnimator.SetBool("Attack", true);//Анимация атаки
+            //gAnimator.SetBool("Attack", true);//Анимация атаки
             speed = 0f;
         }
     }
@@ -121,7 +123,8 @@ public class golemSC : MonoBehaviour
 
     private void DeafaultAnim()
     {
-        gAnimator.SetBool("Idle", true);
+        //gAnimator.SetBool("Idle", true);
+        gAnimator.SetFloat("Walk", 2f);
     }
 
     IEnumerator BeforeStart()
@@ -133,7 +136,9 @@ public class golemSC : MonoBehaviour
 
     public void BeforeDie()
     {
-        GameObject.FindGameObjectWithTag("Player").GetComponent<Mage>().GolemAura(false, null);
+        //GameObject.FindGameObjectWithTag("Player").GetComponent<Mage>().GolemAura(false, null);
+        GameObjectsManager.GetPlayerThingsObjectByTag("Player")[0].GetComponent<Mage>().GolemAura(false, null);
+        GameObjectsManager.UnregisterPlayers(gameObject);
         Destroy(gameObject);
     }
 }
