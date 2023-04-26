@@ -83988,6 +83988,7 @@ GameObject:
   - component: {fileID: 5615790320137143139}
   - component: {fileID: 5615790320137143142}
   - component: {fileID: 5615790320137143137}
+  - component: {fileID: 23563282546821158}
   - component: {fileID: 5615790320137143136}
   - component: {fileID: 5615790320137143150}
   m_Layer: 9
@@ -84088,6 +84089,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &23563282546821158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5615790320137143138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caf4566f88c127f4f8923bdde3520caa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  maxHealth: 0
+  armor: 0
+  mageResist: 0
 --- !u!114 &5615790320137143136
 MonoBehaviour:
   m_ObjectHideFlags: 0

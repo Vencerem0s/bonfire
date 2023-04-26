@@ -21,11 +21,12 @@ public class Mage : MonoBehaviour
 
     void Start()
     {
-        GameObjectsManager.Register(gameObject);
         //Staff = GameObject.Find("Staff").GetComponent<Staff>();
         movementscript = GetComponent<IlyaMovement>();
         chAnimator = GetComponent<Animator>();
         mana = 0f;
+
+        //GameEventManger.BloodHeal += TakeMana;
 
         StartCoroutine(ActivateAura());
 
@@ -69,7 +70,8 @@ public class Mage : MonoBehaviour
         {
             movementscript.SpellDuration(3f);
             chAnimator.SetTrigger("BloodSpell");//, true);
-            BloodMagic();
+            //BloodMagic();
+            GameEventManger.BloodDamage?.Invoke("magical", 20);
             StartCoroutine(CDSpellMage(cdspell2));
             cdspell2 = 0f;
             //chAnimator.SetBool("BloodSpell", false);

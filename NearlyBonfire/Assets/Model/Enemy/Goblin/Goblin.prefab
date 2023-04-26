@@ -1450,6 +1450,7 @@ GameObject:
   - component: {fileID: 7389716846615654884}
   - component: {fileID: 5545644588338921158}
   - component: {fileID: 1953063641721107561}
+  - component: {fileID: 45659850030057712}
   - component: {fileID: 1329787397825281664}
   m_Layer: 0
   m_Name: Goblin
@@ -1531,6 +1532,22 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &45659850030057712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4611537535365882328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7bf19b253de3a14fbdac3b27cfb8703, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  maxHealth: 0
+  armor: 0
+  mageResist: 2
 --- !u!114 &1329787397825281664
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -38,7 +38,7 @@ public class golemSC : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         curHealth = GetComponent<Enemy>();
         gAnimator = GetComponent<Animator>();
-
+        GameEventManger.Stuned?.Invoke(4);
         AgroOnMe();
         //Instantiate(explosionGolem); //запуск префаба взрыва от появления
 
