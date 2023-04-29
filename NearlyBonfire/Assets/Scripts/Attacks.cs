@@ -2,30 +2,30 @@ using UnityEngine;
 
 public class Attacks : MonoBehaviour
 {
-    private GameObject _weapon;
+    /*private GameObject weapon;
+    //private Bow bow;
     private Staff staff;
-    private Animator _chAnimator;
 
     private void Start()
     {
-        _chAnimator = GetComponent<Animator>();
-        if (GameObject.Find("Dwarf"))
+        if(GameObject.Find("Dwarf"))
         {
-            GameObject.Find("Dwarf").GetComponent<Movement>().speedMove = 4f;
+            GameObject.Find("Dwarf").GetComponent<Movement>().speed = 4f;
             Debug.Log("функция для атаки гнома");
         }
         else if(GameObject.Find("Mage"))
         {
-            GameObject.Find("Mage").GetComponent<Movement>().speedMove = 4f;
-            _weapon = GameObject.Find("Staff");
-            staff = _weapon.GetComponent<Staff>();
+            GameObject.Find("Mage").GetComponent<Movement>().speed = 4f;
+            weapon = GameObject.Find("Staff");
+            staff = weapon.GetComponent<Staff>();
             Debug.Log("функция для атаки мага");
         }
         else if(GameObject.Find("Hunter"))
         {
-            GameObject.Find("Hunter").GetComponent<Movement>().speedMove = 7f;
-            //_weapon = GameObject.Find("Bow");
-            //_bow = _weapon.GetComponent<Bow>();
+            GameObject.Find("Hunter").GetComponent<Movement>().speed = 7f;
+            weapon = GameObject.Find("Bow");
+            //bow = weapon.GetComponent<Bow>();
+            //Debug.Log("функция для атаки охотника");
         }
         else
         {
@@ -33,6 +33,7 @@ public class Attacks : MonoBehaviour
         }
     }
 
+<<<<<<< HEAD
     //private void Update()
     //{
     //    //CharacterAttack();
@@ -85,4 +86,29 @@ public class Attacks : MonoBehaviour
     //            //staff.StaffSpellOff();
     //        }
     //    }
+=======
+    private void OnMouseDown()
+    {
+        if (weapon.name == "Bow")
+        {
+            //bow.Shoot();
+        }
+    }
+
+    private void OnMouseDrag()
+    {
+        if (weapon.name == "Staff")
+        {
+            //staff.StaffSpell();
+        }
+    }
+
+    private void OnMouseUp()
+    {
+        if (weapon.name == "Staff")
+        {
+            //staff.StaffSpellOff();
+        }
+    }*/
+>>>>>>> a5a5a81cc24d7df3b1de30d229438dc94e9c9984
 }

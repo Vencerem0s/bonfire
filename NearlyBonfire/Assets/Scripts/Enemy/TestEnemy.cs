@@ -100,7 +100,7 @@ public class TestEnemy : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("trippleArrow"))
         {
-            _enemy.TakeDamage(_enemy._health);
+            _enemy.TakeDamage(_enemy.health);
         }
         else if (other.gameObject.CompareTag("trap"))
         {

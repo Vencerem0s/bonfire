@@ -75,9 +75,10 @@ GameObject:
   - component: {fileID: 4408297863206454}
   - component: {fileID: 95380085654935804}
   - component: {fileID: 5219707134572027757}
-  - component: {fileID: -7250311343630406180}
   - component: {fileID: 3395510633912070984}
   - component: {fileID: 9048280549432944769}
+  - component: {fileID: 8075118751395495028}
+  - component: {fileID: 1585398071869199702}
   m_Layer: 0
   m_Name: PBR_Golem
   m_TagString: golem
@@ -135,19 +136,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
---- !u!114 &-7250311343630406180
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1067925524328404}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 039671358be1fbd4ba10fd3a6e1fa26c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 100
 --- !u!65 &3395510633912070984
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -183,6 +171,40 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &8075118751395495028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1067925524328404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8106ad75fc6cbaa40b8fb7df6f9ad822, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  maxHealth: 0
+  armor: 20
+  mageResist: 25
+--- !u!143 &1585398071869199702
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1067925524328404}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1088256926929212
 GameObject:
   m_ObjectHideFlags: 0
@@ -192,6 +214,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4835780311418736}
+  - component: {fileID: 1740804816064264272}
+  - component: {fileID: 6749154669477488011}
   m_Layer: 0
   m_Name: Index_Proximal_L
   m_TagString: Untagged
@@ -214,6 +238,35 @@ Transform:
   m_Father: {fileID: 4894528786394434}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1740804816064264272
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1088256926929212}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 138.6042, y: 75.000015, z: 99.999985}
+  m_Center: {x: 1.4031708, y: -0.00006224016, z: -0.000000024718066}
+--- !u!114 &6749154669477488011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1088256926929212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce0a677d296a6c04e920f975fb62d4c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 15
+  tag1: Enemy
+  tag2: Enemy
+  tag3: Enemy
 --- !u!1 &1124596519333206
 GameObject:
   m_ObjectHideFlags: 0
@@ -585,6 +638,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4818361460809012}
+  - component: {fileID: 1073456211366950909}
+  - component: {fileID: 8574311570651291761}
   m_Layer: 0
   m_Name: Index_Proximal_R
   m_TagString: Untagged
@@ -607,6 +662,35 @@ Transform:
   m_Father: {fileID: 4699477660470766}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1073456211366950909
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1620575693851942}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 157.52556, y: 98.82976, z: 100.00001}
+  m_Center: {x: -9.662929, y: 8.214819, z: -9.699953}
+--- !u!114 &8574311570651291761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1620575693851942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce0a677d296a6c04e920f975fb62d4c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 15
+  tag1: Enemy
+  tag2: Enemy
+  tag3: Enemy
 --- !u!1 &1623131121118994
 GameObject:
   m_ObjectHideFlags: 0

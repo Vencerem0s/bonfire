@@ -9,6 +9,22 @@ TagManager:
   - darkSphere
   - golem
   - Enemy
+  - Boar
+  - Bow
+  - Arrow
+  - trap
+  - testCol
+  - trippleArrow
+  - Enemy
+  - Front
+  - Back
+  - Left
+  - Right
+  - LeftFront
+  - LeftBack
+  - RightFront
+  - RightBack
+  - Enemy
   - Front
   - Back
   - Left
@@ -30,12 +46,14 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
+  - _enemy
   - Enemy
+  - 
   - Water
   - UI
   - 
   - 
-  - 
+  - Player
   - Player
   - 
   - 
