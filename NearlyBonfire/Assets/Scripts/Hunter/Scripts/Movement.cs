@@ -37,6 +37,7 @@ public class Movement : MonoBehaviour
         _moveVector.x = Input.GetAxis("Horizontal");
         _moveVector.z = Input.GetAxis("Vertical");
 
+
         switch (direction)
         {
             case "Forward":

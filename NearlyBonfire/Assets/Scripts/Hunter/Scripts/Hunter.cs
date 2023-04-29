@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class Hunter : MonoBehaviour
@@ -20,6 +22,7 @@ public class Hunter : MonoBehaviour
     private Transform _hunterPos;
     private Animator _chAnimator;
     private Movement _movement;
+    private CancellationTokenSource _cts;
 
     private void Start()
     {
@@ -31,8 +34,9 @@ public class Hunter : MonoBehaviour
         _hunterPos = GetComponent<Transform>();
         _chAnimator = GetComponent<Animator>();
         _movement = GetComponent<Movement>();
-        StartCoroutine(AccumulationOfConcentration());
-        StartCoroutine(StandTrap());
+        _cts = new CancellationTokenSource();
+        AccumulationOfConcentration();
+        StandTrap();
     }
 
     private void Update()
@@ -62,37 +66,36 @@ public class Hunter : MonoBehaviour
         }
     }
 
-    private IEnumerator AccumulationOfConcentration()
+    private async void AccumulationOfConcentration()
     {
-        while (true)
+        while (_cts.IsCancellationRequested == false)
         {
             if (_ultimate == false)
             {
                 Vector2 hunterPos1 = new Vector2((float)System.Math.Round(_hunterPos.position.x, 1), (float)System.Math.Round(_hunterPos.position.z, 1));
-                yield return new WaitForSeconds(0.2f);
+                await Task.Delay(200);
                 Vector2 hunterPos2 = new Vector2((float)System.Math.Round(_hunterPos.position.x, 1), (float)System.Math.Round(_hunterPos.position.z, 1));
                 if ((hunterPos1 != hunterPos2) && takeDamage == false)
                 {
                     if (concentration >= 100f) concentration = 100f;
                     else
                     {
-                        yield return new WaitForSeconds(1f);
+                        await Task.Delay(1000);
                         concentration += 1f;
                     }
-
                 }
             }
         }
     }
 
-    private IEnumerator StandTrap()
+    private async void StandTrap()
     {
-        while (true)
+        while (_cts.IsCancellationRequested == false)
         {
             if (_ultimate == false)
             {
                 Vector2 hunterPos1 = new Vector2((float)System.Math.Round(_hunterPos.position.x, 1), (float)System.Math.Round(_hunterPos.position.z, 1));
-                yield return new WaitForSeconds(0.2f);
+                await Task.Delay(200);
                 Vector2 hunterPos2 = new Vector2((float)System.Math.Round(_hunterPos.position.x, 1), (float)System.Math.Round(_hunterPos.position.z, 1));
                 if (hunterPos1 != hunterPos2)
                 {
@@ -100,17 +103,67 @@ public class Hunter : MonoBehaviour
                     {
                         Instantiate(trap, transform.position, transform.rotation);
                         _trapTime = 5f;
-                        yield return new WaitForSeconds(1f);
+                        await Task.Delay(1000);
                     }
                     else
                     {
-                        yield return new WaitForSeconds(1f);
+                        await Task.Delay(1000);
                         _trapTime--;
                     }
                 }
             }
         }
     }
+
+    //private IEnumerator AccumulationOfConcentration()
+    //{
+    //    while (true)
+    //    {
+    //        if (_ultimate == false)
+    //        {
+    //            Vector2 hunterPos1 = new Vector2((float)System.Math.Round(_hunterPos.position.x, 1), (float)System.Math.Round(_hunterPos.position.z, 1));
+    //            yield return new WaitForSeconds(0.2f);
+    //            Vector2 hunterPos2 = new Vector2((float)System.Math.Round(_hunterPos.position.x, 1), (float)System.Math.Round(_hunterPos.position.z, 1));
+    //            if ((hunterPos1 != hunterPos2) && takeDamage == false)
+    //            {
+    //                if (concentration >= 100f) concentration = 100f;
+    //                else
+    //                {
+    //                    yield return new WaitForSeconds(1f);
+    //                    concentration += 1f;
+    //                }
+
+    //            }
+    //        }
+    //    }
+    //}
+
+    //private IEnumerator StandTrap()
+    //{
+    //    while (true)
+    //    {
+    //        if (_ultimate == false)
+    //        {
+    //            Vector2 hunterPos1 = new Vector2((float)System.Math.Round(_hunterPos.position.x, 1), (float)System.Math.Round(_hunterPos.position.z, 1));
+    //            yield return new WaitForSeconds(0.2f);
+    //            Vector2 hunterPos2 = new Vector2((float)System.Math.Round(_hunterPos.position.x, 1), (float)System.Math.Round(_hunterPos.position.z, 1));
+    //            if (hunterPos1 != hunterPos2)
+    //            {
+    //                if (_trapTime <= 0)
+    //                {
+    //                    Instantiate(trap, transform.position, transform.rotation);
+    //                    _trapTime = 5f;
+    //                    yield return new WaitForSeconds(1f);
+    //                }
+    //                else
+    //                {
+    //                    yield return new WaitForSeconds(1f);
+    //                    _trapTime--;
+    //                }
+    //            }
+    //        }
+    //    }
+    //}
 
     private void Shoot()
     {
@@ -124,36 +177,61 @@ public class Hunter : MonoBehaviour
         Instantiate(trippleArrow, shotPointDiagonalRight.position, shotPointDiagonalRight.rotation);
     }
 
-    private void SpawnBoar()
-    {
-        StartCoroutine(SpawnBoarPosition());
-    }
 
-    private IEnumerator SpawnBoarPosition()
+    private async void SpawnBoar()
     {
         Instantiate(boar, boarSpawnPositionLeftUp.position, boarSpawnPositionLeftDown.rotation);
-        yield return new WaitForSeconds(2f);
+        await Task.Delay(2000);
         Instantiate(boar, boarSpawnPositionRight.position, boarSpawnPositionRight.rotation);
-        yield return new WaitForSeconds(2f);
+        await Task.Delay(2000);
         Instantiate(boar, boarSpawnPositionLeftDown.position, boarSpawnPositionLeftDown.rotation);
+        Debug.Log("boarrrr");
     }
+    //private void SpawnBoar()
+    //{
+    //    StartCoroutine(SpawnBoarPosition());
+    //}
+
+    //private IEnumerator SpawnBoarPosition()
+    //{
+    //    Instantiate(boar, boarSpawnPositionLeftUp.position, boarSpawnPositionLeftDown.rotation);
+    //    yield return new WaitForSeconds(2f);
+    //    Instantiate(boar, boarSpawnPositionRight.position, boarSpawnPositionRight.rotation);
+    //    yield return new WaitForSeconds(2f);
+    //    Instantiate(boar, boarSpawnPositionLeftDown.position, boarSpawnPositionLeftDown.rotation);
+    //}
 
     private void StartUltimate()
     {
         concentration -= 100f;
         _ultimate = true;
-        StartCoroutine(Ultimate());
+        Ultimate();
     }
 
-    private IEnumerator Ultimate()
+    private async void Ultimate()
     {
         _movement.speedMove *= 2f;
         _arrowDamage *= 2f;
-        yield return new WaitForSeconds(10f);
+        await Task.Delay(10000);
         _movement.speedMove /= 2f;
         _arrowDamage /= 2f;
         _ultimate = false;
     }
+
+    private void OnDestroy()
+    {
+        _cts.Cancel();
+    }
+
+    //private IEnumerator Ultimate()
+    //{
+    //    _movement.speedMove *= 2f;
+    //    _arrowDamage *= 2f;
+    //    yield return new WaitForSeconds(10f);
+    //    _movement.speedMove /= 2f;
+    //    _arrowDamage /= 2f;
+    //    _ultimate = false;
+    //}
 
     public float DamageCalculation()
     {

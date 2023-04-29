@@ -1,10 +1,9 @@
-using Unity.VisualScripting;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class StAttackBehaviour : IPlayerBehaviour
 {
     private Dwarf _dwarf;
+    private GameObject[] _ax;
 
     public void Enter()
     {
@@ -14,6 +13,11 @@ public class StAttackBehaviour : IPlayerBehaviour
     public void Exit()
     {
         Debug.Log("StAttack EXIT");
+    }
+
+    public void Update()
+    {
+
     }
 
     public StAttackBehaviour(Dwarf dwarf)

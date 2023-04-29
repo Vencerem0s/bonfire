@@ -22,7 +22,7 @@ public class lightBoltSC : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (thisEnemy.health <= 0)
+        if (thisEnemy._health <= 0)
         {
             Instantiate(explosionAnim, transform.position, transform.rotation);
             Destroy(gameObject);

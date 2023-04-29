@@ -24,6 +24,8 @@ TagManager:
   - trap
   - testCol
   - trippleArrow
+  - Ax
+  - Shield
   layers:
   - Default
   - TransparentFX

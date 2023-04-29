@@ -25,6 +25,7 @@ public class TestEnemy : MonoBehaviour
 
     private void Update()
     {
+        speed = 0f;
         if (_stun > 0f)
         {
             return;
@@ -65,6 +66,9 @@ public class TestEnemy : MonoBehaviour
 
     public void Stun(float secs)
     {
+        if (secs <= 0f)
+            return;
+
         _stun = secs;
         StartCoroutine(StunCoroutine());
     }
@@ -81,7 +85,8 @@ public class TestEnemy : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("golem") || other.gameObject.CompareTag("lightBolt"))
         {
-            _player.GetComponent<Hunter>().takeDamage = true;
+            //нужно для охотницы
+            //_player.GetComponent<Hunter>().takeDamage = true;
             //анимация атаки
             speed = 0f;
         }
@@ -111,7 +116,8 @@ public class TestEnemy : MonoBehaviour
         {
             //анимация ходьбы
             speed = 2f;
-            _player.GetComponent<Hunter>().takeDamage = false;
+            //нужно для охотницы
+            //_player.GetComponent<Hunter>().takeDamage = false;
         }
     }
 

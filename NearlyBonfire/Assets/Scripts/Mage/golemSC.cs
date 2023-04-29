@@ -40,7 +40,7 @@ public class golemSC : MonoBehaviour
 
     void Update()
     {
-        if (curHealth.health <= 0)
+        if (curHealth._health <= 0)
         {
             DeafaultAnim();
             gAnimator.SetBool("Die", true);
