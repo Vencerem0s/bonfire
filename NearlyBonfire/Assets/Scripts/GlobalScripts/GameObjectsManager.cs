@@ -1,20 +1,27 @@
-using OpenCover.Framework.Model;
+//using OpenCover.Framework.Model;
 using System.Collections.Generic;
-using System.Linq;
+//using System.Linq;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public sealed class GameObjectsManager : MonoBehaviour
 {
 
-    public static GameObjectsManager _instanse
+    private static GameObjectsManager _instanse
     {
         get
         {
+            Object[] singltons = FindObjectsOfType(typeof(GameObjectsManager));
+            if (singltons.Length > 0)//singltons != null)// || singltons[0] != null)
+                m_instanse = (GameObjectsManager)singltons[0];
+
             if (m_instanse == null)
             {
                 var go = new GameObject("[GAME OBJECTS MANAGER]");
                 m_instanse = go.AddComponent<GameObjectsManager>();
-                DontDestroyOnLoad(go);
+
+                if (Application.isPlaying)
+                    DontDestroyOnLoad(go);
             }
 
             return m_instanse;
@@ -24,6 +31,13 @@ public sealed class GameObjectsManager : MonoBehaviour
     private static GameObjectsManager m_instanse;
 
     private List<GameObject> _allObjects = new List<GameObject>();
+
+    private void Start()
+    {
+        Object[] singltons = FindObjectsOfType(typeof(GameObjectsManager));
+        if (singltons.Length > 1)
+            Destroy(gameObject);
+    }
 
     public static void Register(GameObject gameObject)
     {
@@ -53,6 +67,7 @@ public sealed class GameObjectsManager : MonoBehaviour
     public static GameObject[] GetGameObjectByTag(string tagName)
     {
         List<GameObject> items = new List<GameObject>();
+        
         foreach (var entry in _instanse._allObjects)
         {
             if (entry.gameObject.tag == tagName)
@@ -64,10 +79,5 @@ public sealed class GameObjectsManager : MonoBehaviour
         return items.ToArray();
     }
 
-
-    /*private void OnDestroy()
-    {
-        _instanse._allObjects.Clear();
-    }*/
-
+        
 }

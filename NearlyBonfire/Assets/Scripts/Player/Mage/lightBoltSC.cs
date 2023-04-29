@@ -1,24 +1,24 @@
-using System;
+/*using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using Unity.VisualScripting;*/
 using UnityEngine;
 using System.Threading.Tasks;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
+//using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class lightBoltSC : MonoBehaviour
 {
     [SerializeField] float speed = 2f;
     public GameObject explosionAnim;
 
-    private Enemy thisHealth;
+    private LiveParametrs _parametr;
     private bool _destroy;
 
     void Start()
     {
         _destroy = true;
         GameObjectsManager.Register(gameObject);
-        thisHealth = GetComponent<Enemy>();
+        _parametr = GetComponent<LiveParametrs>();
 
         AgroOnMe();
     }
@@ -31,7 +31,7 @@ public class lightBoltSC : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (thisHealth.health <= 0)
+        if (_parametr.health <= 0)
         {
             Instantiate(explosionAnim, transform.position, transform.rotation);
             Destroy(gameObject);

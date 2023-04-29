@@ -1,5 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+//Общий класс для объектов способных погибать
+/*using System.Collections;
+using System.Collections.Generic;*/
 using UnityEngine;
 
 public class LiveParametrs : MonoBehaviour
@@ -11,22 +12,28 @@ public class LiveParametrs : MonoBehaviour
         GameObjectsManager.Register(gameObject);
         maxHealth = health;
     }
+
+    protected virtual void Update()
+    {
+
+    }
+
     public virtual void TakeDamage(string typeDamage,float damage)
     {
         switch (typeDamage)
         {
             case "physical":
-                health -= (damage - armor);
+                health -= damage - (damage * armor / 100);
                 break;
 
             case "magical":
-                health -= (damage - mageResist);
+                health -= damage - (damage * mageResist / 100);
                 break;
         }
     }
 
     private void OnDestroy()
     {
-        GameObjectsManager.Unregister(gameObject);
+        //GameObjectsManager.Unregister(gameObject);
     }
 }

@@ -5,11 +5,14 @@ using static UnityEngine.GraphicsBuffer;
 using UnityEngine.AI;
 using System.Threading.Tasks;
 using Unity.VisualScripting;
+using System;
+using static UnityEditor.Progress;
+using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class golemSC : MonoBehaviour
 {
     private Transform agro; // —сылка на Transform agro
-    private GameObject[] enemy;
+    //private GameObject[] enemy;
 
     //public GameObject explosionGolem;
     //private GameObject closest;
@@ -18,7 +21,7 @@ public class golemSC : MonoBehaviour
 
     private Animator gAnimator;
 
-    private Enemy curHealth;
+    private LiveParametrs curHealth;
 
     public float speed = 2f;
 
@@ -36,7 +39,7 @@ public class golemSC : MonoBehaviour
         GolemStun();
 
         agent = GetComponent<NavMeshAgent>();
-        curHealth = GetComponent<Enemy>();
+        curHealth = GetComponent<LiveParametrs>();
         gAnimator = GetComponent<Animator>();
         GameEventManger.Stuned?.Invoke(4);
         AgroOnMe();
@@ -84,15 +87,28 @@ public class golemSC : MonoBehaviour
         DeafaultAnim();
 
         //enemy = GameObject.FindGameObjectsWithTag("Enemy");
-        enemy = GameObjectsManager.GetGameObjectByTag("Enemy");
+        GameObject[] enemy = GameObjectsManager.GetGameObjectByTag("Enemy");
+        /*GameObject[] enemyManger = GameObjectsManager.GetGameObjects<GameObject>();
+        List<GameObject> enemy = new List<GameObject>();
 
-        if (enemy.Length <= 0)
+        if (enemyManger == null)
         {
             return;
         }
 
+        foreach (var entry in enemyManger)
+        {
+            if (entry.gameObject.tag == "Enemy")
+            {
+                enemy.Add(entry);
+            }
+        }*/
+
         float distance = 0f;
         Vector3 position = transform.position;
+
+        //enemy.ToArray();
+
         foreach (GameObject go in enemy)
         {
             Vector3 diff = go.transform.position - position;

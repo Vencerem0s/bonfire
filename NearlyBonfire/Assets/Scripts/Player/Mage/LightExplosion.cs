@@ -8,11 +8,11 @@ public class LightExplosion : MonoBehaviour
         Destroy(gameObject, 2f);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            collision.gameObject.GetComponent<TestEnemy>().Stun(2f);
+            collision.gameObject.GetComponent<EnemyMovement>().Stun(2);
         }
     }
 }

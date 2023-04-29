@@ -583,8 +583,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 0.5544776, y: 0.53191864, z: 0.29507124}
-  m_Center: {x: 0.0040639956, y: 0.17220683, z: 0.039023675}
+  m_Size: {x: 0.5544776, y: 1.0712116, z: 0.29507124}
+  m_Center: {x: 0.004063991, y: -0.09743997, z: 0.039022848}
 --- !u!114 &6922363827072233749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -598,9 +598,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
-  tag1: Player
+  tag1: golem
   tag2: lightBolt
-  tag3: golem
+  tag3: Player
 --- !u!1 &1052308104962092580
 GameObject:
   m_ObjectHideFlags: 0
@@ -1452,6 +1452,7 @@ GameObject:
   - component: {fileID: 1953063641721107561}
   - component: {fileID: 45659850030057712}
   - component: {fileID: 1329787397825281664}
+  - component: {fileID: 2482197513379259884}
   m_Layer: 0
   m_Name: Goblin
   m_TagString: Enemy
@@ -1509,7 +1510,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.1785965, y: 2.0976086, z: 1}
-  m_Center: {x: 0.03245926, y: 1.0334625, z: 0}
+  m_Center: {x: 0.03245926, y: 1, z: 0}
 --- !u!195 &1953063641721107561
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1560,6 +1561,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 608345fc7095f4e45bbb9ea95726cb72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agro: {fileID: 0}
+  gAnimator: {fileID: 0}
+--- !u!143 &2482197513379259884
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4611537535365882328}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2.39
+  m_Radius: 0.56
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &5092490904464790554
 GameObject:
   m_ObjectHideFlags: 0

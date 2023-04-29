@@ -14,4 +14,6 @@ public class GameEventManger
 
     public static Action<float> BloodHeal; //передаем количество здоровья магу за заклинание крови
 
+    public static Action<float> TakeAttribute;
+
 }

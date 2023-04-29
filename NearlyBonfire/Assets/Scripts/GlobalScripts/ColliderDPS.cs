@@ -1,5 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+/*using System.Collections;
+using System.Collections.Generic;*/
 using UnityEngine;
 
 public class ColliderDPS : MonoBehaviour
@@ -11,21 +11,15 @@ public class ColliderDPS : MonoBehaviour
     {
         if (other.gameObject.CompareTag(tag1))
         {
-            //collision.gameObject.GetComponent<Enemy>().TakeDamage(damage);
-            print($"Урон {damage} по {tag1}!");
-            //нанесение урона по цели
+            other.GetComponent<LiveParametrs>().TakeDamage("physical", damage);
         }
         else if (other.gameObject.CompareTag(tag2))
         {
-            //collision.gameObject.GetComponent<Enemy>().TakeDamage(damage);
-            print($"Урон {damage} по {tag2}!");
-            //нанесение урона по цели
+            other.GetComponent<LiveParametrs>().TakeDamage("physical", damage);
         }
         else if (other.gameObject.CompareTag(tag3))
         {
-            //collision.gameObject.GetComponent<Enemy>().TakeDamage(damage);
-            print($"Урон {damage} по {tag3}!");
-            //нанесение урона по цели
+            other.GetComponent<LiveParametrs>().TakeDamage("physical", damage);
         }
     }  
 }

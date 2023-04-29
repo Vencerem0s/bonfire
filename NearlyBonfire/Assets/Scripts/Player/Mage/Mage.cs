@@ -13,7 +13,7 @@ public class Mage : MonoBehaviour
 
     private Vector3 startGolemPos;
 
-    [SerializeField] private float cdspell1, cdspell2, cdulta;
+    [SerializeField] private float cdspell1, cdspell2, cdulta, _manaPerSec;
 
     public float mana;
 
@@ -26,7 +26,7 @@ public class Mage : MonoBehaviour
         chAnimator = GetComponent<Animator>();
         mana = 0f;
 
-        //GameEventManger.BloodHeal += TakeMana;
+        GameEventManger.TakeAttribute += TakeMana;
 
         StartCoroutine(ActivateAura());
 
@@ -146,8 +146,8 @@ public class Mage : MonoBehaviour
             else
             {
                 aura.SetActive(true);
-                yield return new WaitForSeconds(0.002f);
-                TakeMana(0.0005f);
+                yield return new WaitForSeconds(1f);
+                TakeMana(_manaPerSec);
                 //запуск анимации ауры
             }
         }
@@ -173,6 +173,11 @@ public class Mage : MonoBehaviour
 
     public void TakeMana(float manna)
     {
+        if (golemobj != null)
+        {
+            return;
+        }
+
         if ((mana + manna) >= 100f)
         {
             mana = 100f;
@@ -211,5 +216,10 @@ public class Mage : MonoBehaviour
     public void LightBoltThrow()
     {
         Instantiate(lightBolt, shotPoint.position, transform.rotation);
+    }
+
+    private void OnDestroy()
+    {
+        GameEventManger.TakeAttribute -= TakeMana;
     }
 }

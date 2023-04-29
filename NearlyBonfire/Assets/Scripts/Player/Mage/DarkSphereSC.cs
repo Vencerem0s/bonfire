@@ -63,12 +63,13 @@ public class DarkSphereSC : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if (collision.CompareTag("Enemy"))
         {
-            collision.GetComponent<Enemy>().TakeDamage(curDps);
-            GameObject.FindGameObjectWithTag("Player").GetComponent<Mage>().TakeMana(5f);
+            collision.GetComponent<EnemyParametrs>().TakeDamage("magical", curDps);
+            //GameObject.FindGameObjectWithTag("Player").GetComponent<Mage>().TakeMana(5f);
+            GameEventManger.TakeAttribute?.Invoke(5);
             Destroy(gameObject);
         }
     }
