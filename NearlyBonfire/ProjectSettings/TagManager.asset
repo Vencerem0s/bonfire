@@ -9,6 +9,15 @@ TagManager:
   - darkSphere
   - golem
   - Enemy
+  - Front
+  - Back
+  - Left
+  - Right
+  - LeftFront
+  - LeftBack
+  - RightFront
+  - RightBack
+  - Enemy
   - Boar
   - Bow
   - Arrow
@@ -25,7 +34,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Player
   - 
   - 
   - 

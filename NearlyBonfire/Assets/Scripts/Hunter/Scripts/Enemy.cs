@@ -4,12 +4,18 @@ public class Enemy : MonoBehaviour
 {
     public float _health;//{ get; private set; }
     public GameObject deathPrefab;
+
+    //public float health;
+    //public GameObject deathPrefab;
     private float maxHealth;
+    
+    private int _myIndex;
 
     private void Start()
     {
         _health = 100f;
         maxHealth = _health;
+        
     }
 
     public void TakeDamage(float damage)

@@ -1,26 +1,33 @@
 using System.Collections;
+using System.Net;
 using UnityEngine;
 
 public class Mage : MonoBehaviour
 {
-    public GameObject lightBolt, golem, aura;
-    private GameObject golemobj;
+    public GameObject lightBolt, preGolemAnim, auraGolem1, auraGolem2, auraGolem3, golem, aura, darkSphere, golemobj;
+    //private GameObject golemobj;
+    private IlyaMovement movementscript;
+    private Animator chAnimator;
 
-    private Transform aurascale;
-    private Vector2 aurascale1, aurascale0;
+    private Staff Staff;
+
+    private Vector3 startGolemPos;
+
     [SerializeField] private float cdspell1, cdspell2, cdulta;
 
-    private float mana;
+    public float mana;
 
-    public Transform shotPoint;
+    public Transform shotPoint, sphereFireStartPoint;
 
     void Start()
     {
+        Staff = GameObject.Find("Staff").GetComponent<Staff>();
+        movementscript = GetComponent<IlyaMovement>();
+        chAnimator = GetComponent<Animator>();
         mana = 0f;
-        aurascale1 = new Vector3(1f, 1f, 1f);
-        aurascale0 = new Vector3(0f, 0f, 0f);
-        aurascale = aura.GetComponent<Transform>();
-        aurascale.localScale = aurascale0;
+
+        StartCoroutine(ActivateAura());
+
         cdspell1 = 5f;
         cdspell2 = 6f;
         cdulta = 20f;
@@ -28,39 +35,70 @@ public class Mage : MonoBehaviour
 
     void Update()
     {
-        if (golemobj)
+        /*if (golemobj != null)
         {
             mana = 0f;
         }
-        StartCoroutine(ActivateAura());
+        else
+        {
+            StartCoroutine(ActivateAura());
+        }*/
         SkillsMage();
-        MovementAnimation();
     }
 
     void SkillsMage()
     {
-        //тут надо включать анимации способностей
-        if (Input.GetKeyDown(KeyCode.Q) && cdspell1 == 5f)
+        if(movementscript.movesum != 0f)
         {
+            //print(movementscript.movesum);
+            return;
+        }
+
+        //тут надо включать анимации способностей
+        if (Input.GetKeyDown(KeyCode.Q) && cdspell1 == 5f && golemobj == null)// && movementscript.speedMove == 0f)
+        {
+            movementscript.SpellDuration(2f);
+            chAnimator.SetTrigger("LightSpell");//, true);
             Instantiate(lightBolt, shotPoint.position, transform.rotation);
             StartCoroutine(CDSpellMage(cdspell1));
             cdspell1 = 0f;
+            //chAnimator.SetBool("LightSpell", false);
         }
-        else if (Input.GetKeyDown(KeyCode.E) && cdspell2 == 6f)
+        else if (Input.GetKeyDown(KeyCode.E) && cdspell2 == 6f && golemobj == null)// && movementscript.speedMove == 0f)
         {
+            movementscript.SpellDuration(3f);
+            chAnimator.SetTrigger("BloodSpell");//, true);
             BloodMagic();
             StartCoroutine(CDSpellMage(cdspell2));
             cdspell2 = 0f;
+            //chAnimator.SetBool("BloodSpell", false);
         }
-        else if (Input.GetKeyDown(KeyCode.F) && cdulta == 20f && mana >= 100f)
+        else if (Input.GetKeyDown(KeyCode.F) && cdulta == 20f && mana >= 100f)// && movementscript.speedMove == 0f)
         {
-            Vector2 screenPosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-            Vector2 worldPosition = Camera.main.ScreenToWorldPoint(screenPosition);
-            Instantiate(golem, worldPosition, transform.rotation);
-            golemobj = GameObject.FindGameObjectWithTag("golem");
-            TakeMana(-100f);
+            movementscript.SpellDuration(4f);
+            chAnimator.SetTrigger("MageUlt");//, true);
+            Ray mouseray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(mouseray, out hit, 100))
+            {
+                Instantiate(preGolemAnim, hit.point, transform.rotation);
+                startGolemPos = hit.point;
+            }
+            /*golemobj = GameObject.FindGameObjectWithTag("golem");
+            TakeMana(-100f);*/
             StartCoroutine(CDSpellMage(cdulta));
             cdulta = 0f;
+            //chAnimator.SetBool("MageUlt", false);
+        }
+        else if (Input.GetMouseButtonDown(0))// && chAnimator.GetBool("Attack") == false)
+        {
+            //chAnimator.SetBool("Run", false);
+            chAnimator.SetTrigger("sphereAttack");//Bool("Attack", true);
+            movementscript.SpellDuration(2.2f);
+        }
+        else if(movementscript.speedMove != 0f && (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.F)))
+        {
+            //проигрывать звук мага отказывается колдовать на ходу
         }
     }
 
@@ -68,6 +106,10 @@ public class Mage : MonoBehaviour
     {
         foreach (GameObject gameObj in GameObject.FindGameObjectsWithTag("Enemy"))
         {
+            if(gameObj == null)
+            {
+                break;
+            }
             gameObj.GetComponent<Enemy>().TakeDamage(50);
             gameObj.GetComponent<Enemy>().BloodLostAnimation();
             gameObject.GetComponent<Enemy>().TakeHealth(10f);
@@ -76,34 +118,35 @@ public class Mage : MonoBehaviour
         }
     }
 
-    IEnumerator ActivateAura()
+    public void ActivateAuraVoid()
     {
-        Vector2 magePos1 = GetComponent<Transform>().position;
-        yield return new WaitForSeconds(2f);
-        Vector2 magePos2 = GetComponent<Transform>().position;
-        if (magePos1 != magePos2)
-        {
-            aurascale.localScale = aurascale0;
-            //запуск анимации угасания ауры
-        }
-        else
-        {
-            aurascale.localScale = aurascale1;
-            TakeMana(0.0005f);
-            //запуск анимации ауры
-        }
+        StartCoroutine(ActivateAura());
     }
 
-    private void MovementAnimation()
+    IEnumerator ActivateAura()
     {
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S))
+        while (true)
         {
-            //запуск анимации ходьбы
-        }
-
-        if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.S))
-        {
-            //запуск анимации idle
+            Vector2 magePos1 = GetComponent<Transform>().position;
+            yield return new WaitForSeconds(0.002f);
+            Vector2 magePos2 = GetComponent<Transform>().position;
+            if (golemobj != null)
+            {
+                aura.SetActive(false);
+                mana = 0f;
+            }
+            else if (magePos1 != magePos2)
+            {
+                aura.SetActive(false);
+                //запуск анимации угасания ауры
+            }
+            else
+            {
+                aura.SetActive(true);
+                yield return new WaitForSeconds(0.002f);
+                TakeMana(0.0005f);
+                //запуск анимации ауры
+            }
         }
     }
 
@@ -135,5 +178,30 @@ public class Mage : MonoBehaviour
         {
             mana += manna;
         }
+    }
+
+    public void ShootDarkSphere()
+    {
+        Instantiate(darkSphere, sphereFireStartPoint.position, transform.rotation);
+    }
+        
+    public void UltExit()
+    {
+        Destroy(GameObject.Find("PrefabStart(Clone)"));
+    }
+
+    public void ActivateGolem()
+    {
+        Instantiate(golem, startGolemPos, transform.rotation);
+        TakeMana(-100f);
+        GolemAura(true, golem);
+    }
+
+    public void GolemAura(bool activity, GameObject golemus)
+    {
+        auraGolem1.SetActive(activity);
+        auraGolem2.SetActive(activity);
+        auraGolem3.SetActive(activity);
+        golemobj = golemus;
     }
 }

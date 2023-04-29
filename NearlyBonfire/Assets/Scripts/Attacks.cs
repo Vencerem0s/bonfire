@@ -33,21 +33,21 @@ public class Attacks : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        //CharacterAttack();
-    }
+    //private void Update()
+    //{
+    //    //CharacterAttack();
+    //}
 
-    private void CharacterAttack()
-    {
-        //if (Input.GetKeyDown(KeyCode.Mouse0))
-        //{
-        //    //_chAnimator.SetBool("Attack", true);
-        //    _chAnimator.SetTrigger("asd");
-        //    _bow.Shoot();
-        //}
-        //else _chAnimator.SetBool("Attack", false);
-    }
+    //private void CharacterAttack()
+    //{
+    //    //if (Input.GetKeyDown(KeyCode.Mouse0))
+    //    //{
+    //    //    //_chAnimator.SetBool("Attack", true);
+    //    //    _chAnimator.SetTrigger("asd");
+    //    //    _bow.Shoot();
+    //    //}
+    //    //else _chAnimator.SetBool("Attack", false);
+    //}
 
     //private void OnMouseDown()
     //{
@@ -72,4 +72,17 @@ public class Attacks : MonoBehaviour
     //        staff.StaffSpellOff();
     //    }
     //}
+    //    if (weapon.name == "Staff")
+    //    {
+    //        //staff.StaffSpell();
+    //    }
+    //}
+
+    //private void OnMouseUp()
+    //{
+    //    if (weapon.name == "Staff")
+    //        {
+    //            //staff.StaffSpellOff();
+    //        }
+    //    }
 }

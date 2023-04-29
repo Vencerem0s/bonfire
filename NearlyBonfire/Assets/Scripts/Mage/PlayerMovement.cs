@@ -18,8 +18,10 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        Move();
+        //Move();
         //LookAtMouse();
+        //Move();
+        LookAtMouse();
     }
 
     void Move()
