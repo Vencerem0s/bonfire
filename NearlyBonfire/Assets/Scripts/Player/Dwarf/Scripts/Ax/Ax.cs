@@ -18,7 +18,7 @@ public class Ax : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            other.gameObject.GetComponent<Enemy>().TakeDamage(_axDamage);
+            other.gameObject.GetComponent<EnemyParametrs>().TakeDamage("physical", _axDamage);
 
             GameObject playerDwarf = FindDwarf();
             ChangeDwarfValues(playerDwarf);

@@ -1,61 +1,68 @@
-//using OpenCover.Framework.Model;
+using OpenCover.Framework.Model;
 using System.Collections.Generic;
-//using System.Linq;
+using System.Linq;
 using UnityEngine;
-using static UnityEngine.EventSystems.EventTrigger;
 
 public sealed class GameObjectsManager : MonoBehaviour
 {
+    public static GameObjectsManager _instance;
+    //{
+    //    //get
+    //    //{
+    //    //    if (m_instance == null)
+    //    //    {
+    //    //        var go = new GameObject("[GAME OBJECTS MANAGER]");
+    //    //        m_instance = go.AddComponent<GameObjectsManager>();
 
-    private static GameObjectsManager _instanse
-    {
-        get
-        {
-            Object[] singltons = FindObjectsOfType(typeof(GameObjectsManager));
-            if (singltons.Length > 0)//singltons != null)// || singltons[0] != null)
-                m_instanse = (GameObjectsManager)singltons[0];
+    //    //        if (Application.isPlaying)
+    //    //            DontDestroyOnLoad(go);
+    //    //    }
 
-            if (m_instanse == null)
-            {
-                var go = new GameObject("[GAME OBJECTS MANAGER]");
-                m_instanse = go.AddComponent<GameObjectsManager>();
+    //    //    return m_instance;
+    //    //}
+    //}
 
-                if (Application.isPlaying)
-                    DontDestroyOnLoad(go);
-            }
-
-            return m_instanse;
-        }
-    }
-
-    private static GameObjectsManager m_instanse;
+    public static GameObjectsManager m_instance;
 
     private List<GameObject> _allObjects = new List<GameObject>();
 
-    private void Start()
+    private void Awake()
     {
-        Object[] singltons = FindObjectsOfType(typeof(GameObjectsManager));
-        if (singltons.Length > 1)
+        //Object[] singltons = FindObjectsOfType(typeof(GameObjectsManager));
+        //if (singltons.Length > 1)
+        //{
+        //    m_instance = (GameObjectsManager)singltons[0];
+        //    Destroy(gameObject);
+        //}
+        if (_instance != null)
             Destroy(gameObject);
+        else
+        {
+            _instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+            
+
+        
     }
 
     public static void Register(GameObject gameObject)
     {
-        if (!_instanse._allObjects.Contains(gameObject))
-            _instanse._allObjects.Add(gameObject);
+        if (!_instance._allObjects.Contains(gameObject))
+            _instance._allObjects.Add(gameObject);
     }
 
     public static void Unregister(GameObject gameObject)
     {
-        if (_instanse._allObjects.Contains(gameObject))
-            _instanse._allObjects.Remove(gameObject);
+        if (_instance._allObjects.Contains(gameObject))
+            _instance._allObjects.Remove(gameObject);
     }
 
     public static GameObject[] GetGameObjects<T>()
     {
         List<GameObject> items = new List<GameObject>();
 
-        foreach (var entry in _instanse._allObjects)
+        foreach (var entry in _instance._allObjects)
         {
             if (entry.GetType() == typeof(T))
                 items.Add(entry);
@@ -67,17 +74,19 @@ public sealed class GameObjectsManager : MonoBehaviour
     public static GameObject[] GetGameObjectByTag(string tagName)
     {
         List<GameObject> items = new List<GameObject>();
-        
-        foreach (var entry in _instanse._allObjects)
+        foreach (var entry in _instance._allObjects)
         {
             if (entry.gameObject.tag == tagName)
-            {
                 items.Add(entry);
-            }
         }
 
         return items.ToArray();
     }
 
-        
+    //private void OnDestroy()
+    //{
+    //    if (!Application.isPlaying)
+    //        Destroy(gameObject);
+    //}
+
 }

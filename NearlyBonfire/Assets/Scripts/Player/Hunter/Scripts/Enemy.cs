@@ -4,14 +4,12 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-<<<<<<< HEAD:NearlyBonfire/Assets/Scripts/Hunter/Scripts/Enemy.cs
+
     public float _health;//{ get; private set; }
     public GameObject deathPrefab;
 
     //public float health;
-=======
     public float health;
->>>>>>> a5a5a81cc24d7df3b1de30d229438dc94e9c9984:NearlyBonfire/Assets/Scripts/Player/Hunter/Scripts/Enemy.cs
     //public GameObject deathPrefab;
     private float maxHealth;
     
@@ -19,14 +17,11 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-<<<<<<< HEAD:NearlyBonfire/Assets/Scripts/Hunter/Scripts/Enemy.cs
         _health = 100f;
         maxHealth = _health;
         
-=======
         GameObjectsManager.Register(gameObject);
         maxHealth = health;
->>>>>>> a5a5a81cc24d7df3b1de30d229438dc94e9c9984:NearlyBonfire/Assets/Scripts/Player/Hunter/Scripts/Enemy.cs
     }
 
     public void TakeDamage(float damage)

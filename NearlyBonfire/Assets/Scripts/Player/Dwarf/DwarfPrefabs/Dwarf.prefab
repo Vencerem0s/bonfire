@@ -1906,7 +1906,7 @@ GameObject:
   - component: {fileID: 6877295638640720179}
   - component: {fileID: 6877295638640720188}
   - component: {fileID: 6877295638640720178}
-  - component: {fileID: 6877295638640720189}
+  - component: {fileID: 3068368839424542113}
   m_Layer: 0
   m_Name: Dwarf
   m_TagString: Player
@@ -1999,7 +1999,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedMove: 5
---- !u!114 &6877295638640720189
+--- !u!114 &3068368839424542113
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2008,7 +2008,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6030432204789171324}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7087ded83b335e44ba446564a9610c19, type: 3}
+  m_Script: {fileID: 11500000, guid: e618d8e8daf22f7479537652d9d0a01e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6543222636268114189

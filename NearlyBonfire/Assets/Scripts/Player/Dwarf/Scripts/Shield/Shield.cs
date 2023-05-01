@@ -13,14 +13,14 @@ public class Shield : MonoBehaviour
     }
 
     #region MONO
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.CompareTag("Enemy"))
         {
-            collision.gameObject.GetComponent<Enemy>().TakeDamage(_shieldDamage);
-            collision.gameObject.GetComponent<TestEnemy>().Stun(_stunTime);
+            other.gameObject.GetComponent<EnemyParametrs>().TakeDamage("physical", _shieldDamage);
+            other.gameObject.GetComponent<TestEnemy>().Stun(_stunTime);
         }
-        else if (collision.gameObject.CompareTag("Boss"))
+        else if (other.gameObject.CompareTag("Boss"))
             Debug.Log("the shield hit the boss");
 
     }

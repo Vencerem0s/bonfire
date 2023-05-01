@@ -33,7 +33,7 @@ public class Attacks : MonoBehaviour
         }
     }
 
-<<<<<<< HEAD
+
     //private void Update()
     //{
     //    //CharacterAttack();
@@ -86,7 +86,7 @@ public class Attacks : MonoBehaviour
     //            //staff.StaffSpellOff();
     //        }
     //    }
-=======
+
     private void OnMouseDown()
     {
         if (weapon.name == "Bow")
@@ -110,5 +110,5 @@ public class Attacks : MonoBehaviour
             //staff.StaffSpellOff();
         }
     }*/
->>>>>>> a5a5a81cc24d7df3b1de30d229438dc94e9c9984
+
 }
