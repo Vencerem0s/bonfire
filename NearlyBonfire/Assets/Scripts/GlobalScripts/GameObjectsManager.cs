@@ -41,9 +41,15 @@ public sealed class GameObjectsManager : MonoBehaviour
             _instance = this;
             DontDestroyOnLoad(gameObject);
         }
+<<<<<<< HEAD
             
 
         
+=======
+
+
+
+>>>>>>> a2d3e6fd1f097b1e2d30a4623ce0feb5352b333c
     }
 
     public static void Register(GameObject gameObject)

@@ -18,8 +18,16 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+<<<<<<< HEAD
         //Move();
         //LookAtMouse();
+=======
+//<<<<<<< HEAD:NearlyBonfire/Assets/Scripts/Mage/PlayerMovement.cs
+        //Move();
+        //LookAtMouse();
+//=======
+//>>>>>>> a5a5a81cc24d7df3b1de30d229438dc94e9c9984:NearlyBonfire/Assets/Scripts/Player/Mage/PlayerMovement.cs
+>>>>>>> a2d3e6fd1f097b1e2d30a4623ce0feb5352b333c
         //Move();
         LookAtMouse();
     }
