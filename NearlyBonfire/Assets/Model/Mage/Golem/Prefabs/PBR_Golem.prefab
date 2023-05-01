@@ -264,6 +264,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 15
+  _typeDamage: physical
   tag1: Enemy
   tag2: Enemy
   tag3: Enemy
@@ -687,7 +688,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce0a677d296a6c04e920f975fb62d4c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 15
+  damage: 25
+  _typeDamage: physical
   tag1: Enemy
   tag2: Enemy
   tag3: Enemy

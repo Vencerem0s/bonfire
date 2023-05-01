@@ -598,6 +598,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+  _typeDamage: physical
   tag1: golem
   tag2: lightBolt
   tag3: Player

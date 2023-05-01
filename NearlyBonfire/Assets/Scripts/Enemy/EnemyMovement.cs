@@ -5,6 +5,7 @@ using System.Collections.Generic;*/
 using UnityEngine;
 using System.Threading.Tasks;
 using UnityEngine.AI;
+using System.Collections;
 
 public class EnemyMovement : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class EnemyMovement : MonoBehaviour
         StartPosition();
         GameEventManger.onPlayerThingAgro += TakeAgro;
         GameEventManger.Stuned += Stun;
-        TakeAgro("Player");
+        StartCoroutine(WaitBeforeStart());
         agent = GetComponent<NavMeshAgent>();
         gAnimator = GetComponent<Animator>();
     }
@@ -29,7 +30,7 @@ public class EnemyMovement : MonoBehaviour
 
     }
 
-    public virtual void StartPosition()
+    protected virtual void StartPosition()
     {
         //тут задаем стартовую позицию врага, относительно правой и левой стороны экрана
     }
@@ -48,5 +49,11 @@ public class EnemyMovement : MonoBehaviour
     {
         GameEventManger.onPlayerThingAgro -= TakeAgro;
         GameEventManger.Stuned -= Stun;
+    }
+
+    IEnumerator WaitBeforeStart()
+    {
+        yield return new WaitForSeconds(1f);
+        TakeAgro("Player");
     }
 }

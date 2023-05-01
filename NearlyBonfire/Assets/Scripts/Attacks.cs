@@ -110,5 +110,5 @@ public class Attacks : MonoBehaviour
             //staff.StaffSpellOff();
         }
     }*/
->>>>>>> a5a5a81cc24d7df3b1de30d229438dc94e9c9984
+
 }
