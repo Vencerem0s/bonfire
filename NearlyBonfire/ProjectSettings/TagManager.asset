@@ -25,6 +25,7 @@ TagManager:
   - trippleArrow
   - Ax
   - Shield
+  - Boss
   layers:
   - Default
   - TransparentFX
