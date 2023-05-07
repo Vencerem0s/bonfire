@@ -6,6 +6,8 @@ using UnityEngine;
 using System.Threading.Tasks;
 using UnityEngine.AI;
 using System.Collections;
+using Unity.VisualScripting;
+//using System;
 
 public class EnemyMovement : MonoBehaviour
 {
@@ -23,13 +25,16 @@ public class EnemyMovement : MonoBehaviour
     protected virtual void Start()
     {
         _stun = false;
-        StartPosition();
         GameEventManger.onPlayerThingAgro += TakeAgro;
         GameEventManger.Stuned += Stun;
         StartCoroutine(WaitBeforeStart());
         
     }
 
+    private void Awake()
+    {
+        StartPosition();
+    }
     protected virtual void Update()
     {
 
@@ -37,7 +42,19 @@ public class EnemyMovement : MonoBehaviour
 
     protected virtual void StartPosition()
     {
-        //тут задаем стартовую позицию врага, относительно правой и левой стороны экрана
+        int _random = Random.Range(1, 2);
+        float _zPos = Random.Range(-13f, 1f);
+
+        if (_random == 1)
+        {
+            Vector3 _sidePos = GameObjectsManager.GetGameObjectByTag("SideCamera")[0].GetComponent<Transform>().position;
+            transform.position = new Vector3 (_sidePos.x, 0f, _sidePos.z + _zPos);
+        }
+        else
+        {
+            Vector3 _sidePos = GameObjectsManager.GetGameObjectByTag("SideCamera")[1].GetComponent<Transform>().position;
+            transform.position = new Vector3(_sidePos.x, 0f, _sidePos.z + _zPos);
+        }
     }
 
     public virtual void TakeAgro(string agroEnemy)
@@ -47,7 +64,9 @@ public class EnemyMovement : MonoBehaviour
 
     public virtual async void Stun(int duration)
     {
+        _stun = true;
         await Task.Delay(duration * 1000);
+        _stun = false;
     }
     
     protected virtual void OnDestroy()

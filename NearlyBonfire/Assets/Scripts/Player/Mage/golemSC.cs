@@ -1,13 +1,13 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
+*/using UnityEngine;
+//using static UnityEngine.GraphicsBuffer;
 using UnityEngine.AI;
 using System.Threading.Tasks;
-using Unity.VisualScripting;
+/*using Unity.VisualScripting;
 using System;
 using static UnityEditor.Progress;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
+using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;*/
 
 public class golemSC : MonoBehaviour
 {
@@ -25,7 +25,7 @@ public class golemSC : MonoBehaviour
 
     public float speed = 2f;
 
-    private Vector3 direction;
+    //private Vector3 direction;
 
     private NavMeshAgent agent;
 

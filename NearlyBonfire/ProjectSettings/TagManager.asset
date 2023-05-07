@@ -8,6 +8,13 @@ TagManager:
   - lightBolt
   - darkSphere
   - golem
+  - Enemy
+  - Boar
+  - Bow
+  - Arrow
+  - trap
+  - testCol
+  - trippleArrow
   - Front
   - Back
   - Left
@@ -16,27 +23,21 @@ TagManager:
   - LeftBack
   - RightFront
   - RightBack
-  - Enemy
-  - Boar
-  - Bow
-  - Arrow
-  - trap
-  - testCol
-  - trippleArrow
   - Ax
   - Shield
+  - SideCamera
   - Boss
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
   - _enemy
-  - Water
-  - UI
   - 
   - s
-  - 
-  - 
+  - Water
+  - UI
+  - Water
+  - UI
   - 
   - Player
   - 
