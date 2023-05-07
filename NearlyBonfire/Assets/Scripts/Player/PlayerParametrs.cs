@@ -7,9 +7,9 @@ public class PlayerParametrs : LiveParametrs
 
     public virtual void TakeHealth(float _healthPoint)
     {
-        if ((health + _healthPoint) >= maxHealth)
+        if ((health + _healthPoint) >= _maxHealth)
         {
-            health = maxHealth;
+            health = _maxHealth;
         }
         else
         {

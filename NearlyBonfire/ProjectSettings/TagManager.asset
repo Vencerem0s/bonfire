@@ -42,21 +42,20 @@ TagManager:
   - trippleArrow
   - Ax
   - Shield
+  - SideCamera
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
   - _enemy
-  - Enemy
-  - 
+  - Water
+  - UI
   - Water
   - UI
   - 
   - 
   - Player
   - Player
-  - 
-  - 
   - 
   - 
   - 

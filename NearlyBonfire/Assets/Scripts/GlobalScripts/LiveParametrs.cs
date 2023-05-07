@@ -5,12 +5,15 @@ using UnityEngine;
 
 public class LiveParametrs : MonoBehaviour
 {
-    public float health, maxHealth, armor, mageResist;
+    [SerializeField] public float health, armor, mageResist;
+    protected private float _maxHealth, _percentArmor, _percentMageResist;
 
     protected virtual void Start()
     {
         GameObjectsManager.Register(gameObject);
-        maxHealth = health;
+        _maxHealth = health;
+        _percentArmor = 100 * (armor * 0.06f) / (1 + armor * 0.06f);
+        _percentMageResist = 100 * (mageResist * 0.06f) / (1 + mageResist * 0.06f);
     }
 
     protected virtual void Update()
@@ -23,11 +26,11 @@ public class LiveParametrs : MonoBehaviour
         switch (typeDamage)
         {
             case "physical":
-                health -= damage - (damage * armor / 100);
+                health -= (damage - damage * _percentArmor / 100);
                 break;
 
             case "magical":
-                health -= damage - (damage * mageResist / 100);
+                health -= (damage - damage * _percentMageResist / 100);
                 break;
         }
     }

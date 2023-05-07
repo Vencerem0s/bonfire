@@ -84021,6 +84021,7 @@ Transform:
   - {fileID: 5147345872873564343}
   - {fileID: 8204191921538582417}
   - {fileID: 879047130117165812}
+  - {fileID: 2331623923019222900}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -84048,6 +84049,7 @@ MonoBehaviour:
   cdspell1: 0
   cdspell2: 0
   cdulta: 0
+  _manaPerSec: 0
   mana: 0
   shotPoint: {fileID: 4628328674642181102}
   sphereFireStartPoint: {fileID: 4628328674642181102}
@@ -84102,7 +84104,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
-  maxHealth: 0
   armor: 0
   mageResist: 0
 --- !u!114 &5615790320137143136
@@ -94605,3 +94606,69 @@ Transform:
   m_Father: {fileID: 6263635885203135149}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -6.3219194, y: -8.862681, z: -1.8569702}
+--- !u!1001 &8338713715365237365
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 5090364067527940568}
+    m_Modifications:
+    - target: {fileID: 6044561236712545537, guid: e5dfa9f77f2063c40b008db56da3efcb, type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6044561236712545537, guid: e5dfa9f77f2063c40b008db56da3efcb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6044561236712545537, guid: e5dfa9f77f2063c40b008db56da3efcb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6044561236712545537, guid: e5dfa9f77f2063c40b008db56da3efcb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6044561236712545537, guid: e5dfa9f77f2063c40b008db56da3efcb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6044561236712545537, guid: e5dfa9f77f2063c40b008db56da3efcb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6044561236712545537, guid: e5dfa9f77f2063c40b008db56da3efcb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6044561236712545537, guid: e5dfa9f77f2063c40b008db56da3efcb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6044561236712545537, guid: e5dfa9f77f2063c40b008db56da3efcb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 6044561236712545537, guid: e5dfa9f77f2063c40b008db56da3efcb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6044561236712545537, guid: e5dfa9f77f2063c40b008db56da3efcb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6046340989532445743, guid: e5dfa9f77f2063c40b008db56da3efcb, type: 3}
+      propertyPath: m_Name
+      value: BloodSpellObject
+      objectReference: {fileID: 0}
+    - target: {fileID: 6046340989532445743, guid: e5dfa9f77f2063c40b008db56da3efcb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e5dfa9f77f2063c40b008db56da3efcb, type: 3}
+--- !u!4 &2331623923019222900 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6044561236712545537, guid: e5dfa9f77f2063c40b008db56da3efcb, type: 3}
+  m_PrefabInstance: {fileID: 8338713715365237365}
+  m_PrefabAsset: {fileID: 0}

@@ -55,5 +55,9 @@ public class RangeMovement : EnemyMovement
         {
             Instantiate(_shootObject, new Vector3(agro.position.x, _shootObject.transform.position.y, agro.position.z), _shootObject.transform.rotation);
         }
+        else
+        {
+            Instantiate(_shootObject, _transformDeparture.position, _transformDeparture.transform.rotation);
+        }
     }
 }

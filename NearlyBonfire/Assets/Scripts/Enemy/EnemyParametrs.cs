@@ -17,7 +17,6 @@ public class EnemyParametrs : LiveParametrs
     {
         if (health <= 0)
         {
-            GameObjectsManager.Unregister(gameObject);
             _animationDeath.gAnimator.SetBool("Die", true);
         }
     }
@@ -35,6 +34,7 @@ public class EnemyParametrs : LiveParametrs
 
     private void OnDestroy()
     {
+        GameObjectsManager.Unregister(gameObject);
         GameEventManger.BloodDamage -= TakeDamage;
     }
 }
