@@ -4,6 +4,6 @@ public class CameraSide : MonoBehaviour
 {
     private void Start()
     {
-        GameObjectsManager.Register(gameObject);
+        GameObjectsManager.Register(this.gameObject);
     }
 }

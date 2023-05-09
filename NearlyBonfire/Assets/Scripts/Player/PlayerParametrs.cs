@@ -15,5 +15,6 @@ public class PlayerParametrs : LiveParametrs
         {
             health += _healthPoint;
         }
+        Debug.Log("health");
     }
 }

@@ -20,6 +20,7 @@ public class EnemyMovement : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         gAnimator = GetComponent<Animator>();
+        StartPosition();
     }
 
     protected virtual void Start()
@@ -31,10 +32,10 @@ public class EnemyMovement : MonoBehaviour
         
     }
 
-    private void Awake()
+    /*private void Awake()
     {
-        StartPosition();
-    }
+        
+    }*/
     protected virtual void Update()
     {
 
@@ -42,18 +43,18 @@ public class EnemyMovement : MonoBehaviour
 
     protected virtual void StartPosition()
     {
-        int _random = Random.Range(1, 2);
+        int _random = Random.Range(0, 100);
         float _zPos = Random.Range(-13f, 1f);
 
-        if (_random == 1)
+        if (_random <= 50)
         {
             Vector3 _sidePos = GameObjectsManager.GetGameObjectByTag("SideCamera")[0].GetComponent<Transform>().position;
-            transform.position = new Vector3 (_sidePos.x, 0f, _sidePos.z + _zPos);
+            transform.position = new Vector3(_sidePos.x, 0f, _sidePos.z);// + _zPos);
         }
         else
         {
             Vector3 _sidePos = GameObjectsManager.GetGameObjectByTag("SideCamera")[1].GetComponent<Transform>().position;
-            transform.position = new Vector3(_sidePos.x, 0f, _sidePos.z + _zPos);
+            transform.position = new Vector3(_sidePos.x, 0f, _sidePos.z);// + _zPos);
         }
     }
 

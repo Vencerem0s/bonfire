@@ -9,7 +9,8 @@ public class EnemyParametrs : LiveParametrs
     protected override void Start()
     {
         base.Start();
-        GameEventManger.BloodDamage += TakeDamage;
+        //GameEventManger.BloodDamage += TakeDamage;
+        GameEventManger.BloodDamage += TakeBloodDamage;
         _animationDeath = GetComponent<EnemyMovement>();
     }
 
@@ -22,6 +23,12 @@ public class EnemyParametrs : LiveParametrs
     }
 
     public override void TakeDamage(string typeDamage, float damage)
+    {
+        base.TakeDamage(typeDamage, damage);
+        //GameEventManger.BloodHeal?.Invoke(damage - mageResist);
+    }
+
+    public virtual void TakeBloodDamage(string typeDamage, float damage)
     {
         base.TakeDamage(typeDamage, damage);
         GameEventManger.BloodHeal?.Invoke(damage - mageResist);

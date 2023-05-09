@@ -78,7 +78,7 @@ public class Mage : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.F) && cdulta == 20f && mana >= 100f)// && movementscript.speedMove == 0f)
         {
-            movementscript.SpellDuration(4f);
+            movementscript.SpellDuration(2f);
             chAnimator.SetTrigger("MageUlt");//, true);
             Ray mouseray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -97,15 +97,15 @@ public class Mage : MonoBehaviour
         {
             //chAnimator.SetBool("Run", false);
             chAnimator.SetTrigger("sphereAttack");//Bool("Attack", true);
-            movementscript.SpellDuration(2.2f);
+            movementscript.SpellDuration(3);
         }
-        else if(movementscript.speedMove != 0f && (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.F)))
+        /*else if(movementscript.speedMove != 0f && (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.F)))
         {
             //проигрывать звук мага отказывается колдовать на ходу
-        }
+        }*/
     }
 
-    void BloodMagic()
+    /*void BloodMagic()
     {
         foreach (GameObject gameObj in GameObject.FindGameObjectsWithTag("Enemy"))
         {
@@ -119,7 +119,7 @@ public class Mage : MonoBehaviour
             TakeMana(5f);
             //запуск анимации вокруг игрока аура получения крови
         }
-    }
+    }*/
 
     public void ActivateAuraVoid()
     {

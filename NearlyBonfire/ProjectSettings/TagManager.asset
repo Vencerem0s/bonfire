@@ -27,13 +27,14 @@ TagManager:
   - Shield
   - SideCamera
   - Boss
+  - Empty
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
   - _enemy
-  - 
-  - s
+  - Water
+  - UI
   - Water
   - UI
   - Water

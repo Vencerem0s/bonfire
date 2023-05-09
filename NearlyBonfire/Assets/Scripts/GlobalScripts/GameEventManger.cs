@@ -1,6 +1,6 @@
-using UnityEngine;
+//using UnityEngine;
 using System;
-using Unity.VisualScripting;
+//using Unity.VisualScripting;
 
 public class GameEventManger
 {
@@ -14,5 +14,9 @@ public class GameEventManger
     public static Action<float> BloodHeal; //передаем количество здоровья магу за заклинание крови
 
     public static Action<float> TakeAttribute;
+
+    public static Action<float> HealBoss;
+
+    public static Action<string> SummonEscort;
 
 }

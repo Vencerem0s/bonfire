@@ -3,6 +3,9 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UIElements;
 using static Cinemachine.AxisState;
+using System.Threading.Tasks;
+using System;
+using System.Collections.Generic;
 
 public class IlyaMovement : MonoBehaviour
 {
@@ -11,10 +14,13 @@ public class IlyaMovement : MonoBehaviour
     private float speedconst, time;
     private Transform _saxeTrans;
     private CharacterController _chController;
-    
+    private List<Task> _awaitList;
+    private Task Tasks;
+
 
     private void Start()
     {
+        _awaitList = new List<Task>();
         speedconst = speedMove;
         time = 0f;
         _chController = GetComponent<CharacterController>();
@@ -24,7 +30,10 @@ public class IlyaMovement : MonoBehaviour
 
     private void Update()
     {
-        CharacterMove(moveVector);
+        if (time <= 0f)
+        {
+            CharacterMove(moveVector);
+        }
         LookAtMouse();
     }
 
@@ -55,17 +64,32 @@ public class IlyaMovement : MonoBehaviour
         _saxeTrans.rotation = Quaternion.AngleAxis(-1 * (angle - 90), Vector3.up); // Вращение объекта на полученное значение градусов.
     }
 
-    public void SpellDuration(float duration)
+    public async void SpellDuration(float duration)
     {
         time = duration;
-        StartCoroutine(SpellDurCour());
+        //StartCoroutine(SpellDurCour());
+        _awaitList.Add(SpellDurCour(duration));
+        //await SpellDurCour(duration);
+        Tasks = Task.WhenAll(_awaitList);
+        try
+        {
+            await Tasks;
+        }
+        catch { }
+        if (Tasks.Status == TaskStatus.RanToCompletion)
+        {
+            time = 0f;
+            speedMove = speedconst;
+        }
     }
 
-    IEnumerator SpellDurCour()
+    //IEnumerator SpellDurCour()
+    async Task SpellDurCour(float duration)
     {
         speedMove = 0f;
-        yield return new WaitForSeconds(time);
-        time = 0f;
-        speedMove = speedconst;
+        await Task.Delay((int)duration * 1000); //Task.WhenAll(SpellDurCour);//yield return new WaitForSeconds(time);
+        /*time = 0f;
+        speedMove = speedconst;*/
+        //print("endinside");
     }
 }

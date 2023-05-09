@@ -36,7 +36,7 @@ public class golemSC : MonoBehaviour
         _destroy = true;
         //StartCoroutine(BeforeStart());
         GameObjectsManager.Register(gameObject);
-        GolemStun();
+        //GolemStun();
 
         agent = GetComponent<NavMeshAgent>();
         curHealth = GetComponent<LiveParametrs>();
